@@ -2,9 +2,9 @@ import { CheckIcon } from '@heroicons/react/20/solid'
 import {useState} from "react";
 
 const steps = [
-    { name: 'Mon', icon: 'M', href: '#', status: 'complete' },
-    { name: 'Tue', icon: 'T', href: '#', status: 'complete' },
-    { name: 'Wed', icon: 'W', href: '#', status: 'current' },
+    { name: 'Mon', icon: 'M', href: '#', status: 'current' },
+    { name: 'Tue', icon: 'T', href: '#', status: 'upcoming' },
+    { name: 'Wed', icon: 'W', href: '#', status: 'upcoming' },
     { name: 'Thu', icon: 'T', href: '#', status: 'upcoming' },
     { name: 'Fri', icon: 'F', href: '#', status: 'upcoming' },
     { name: 'Sat', icon: 'S', href: '#', status: 'upcoming' },
@@ -15,8 +15,39 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
+
+
 export default function DayNav(props) {
     const [navSelectedDay, setNavSelectedDay] = useState()
+
+    const handleUpcomingOnSelect = (selectedDay, currentState) => {
+        //Updates the day nav depending on what day is selected, and whether it's a previous day, or an upcoming day
+        if (currentState === 'upcoming') {
+            steps.every((day) => {
+                if (selectedDay === day.name) {
+                    day.status = 'current'
+                    return false
+                }
+                day.status = 'complete'
+                return true
+            })
+        } else if (currentState === 'completed') {
+            //If it is a previous day, reset the nav styles, and update to the new one
+            //TODO work out a cleaner way to do this
+
+            steps.forEach((day) => {
+                day.status = 'upcoming'
+            })
+            steps.every((day) => {
+                if (selectedDay === day.name) {
+                    day.status = 'current'
+                    return false
+                }
+                day.status = 'complete'
+                return true
+            })
+        }
+    }
 
     return (
         <nav aria-label="Progress">
@@ -29,6 +60,10 @@ export default function DayNav(props) {
                                     <div className="h-0.5 w-full bg-indigo-600" />
                                 </div>
                                 <a
+                                    onClick={() => {
+                                        props.daySelect(step.name)
+                                        handleUpcomingOnSelect(step.name, 'completed')
+                                    }}
                                     href="#"
                                     className="relative flex h-8 w-8  justify-center rounded-md border-2 border-indigo-600 bg-indigo-600 hover:bg-indigo-900"
                                 >
@@ -58,6 +93,7 @@ export default function DayNav(props) {
                                 <a
                                     onClick={() => {
                                         props.daySelect(step.name)
+                                        handleUpcomingOnSelect(step.name, 'upcoming')
                                     }}
                                     href="#"
                                     className="group relative flex h-8 w-8 justify-center rounded-md border-2 border-gray-300 bg-white hover:border-gray-400"
