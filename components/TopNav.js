@@ -57,18 +57,6 @@ export default function TopNav(props) {
                                     >
                                         Progress Tracking
                                     </a>
-                                    <a
-                                        href="#"
-                                        className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
-                                    >
-                                        Projects
-                                    </a>
-                                    <a
-                                        href="#"
-                                        className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
-                                    >
-                                        Calendar
-                                    </a>
                                 </div>
                             </div>
                             <div className="flex items-center">
@@ -109,7 +97,7 @@ export default function TopNav(props) {
                                                 <span className="sr-only">Open user menu</span>
                                                 <img
                                                     className="h-8 w-8 rounded-full"
-                                                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                                    src="https://images.unsplash.com/photo-1563050912-b15276e395c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjZ8fGZpc2h8ZW58MHwyfDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
                                                     alt=""
                                                 />
                                             </Menu.Button>
@@ -153,6 +141,9 @@ export default function TopNav(props) {
                                                 <Menu.Item>
                                                     {({ active }) => (
                                                         <a
+                                                            onClick={() => {
+                                                                logOut()
+                                                            }}
                                                             href="#"
                                                             className={classNames(
                                                                 active ? 'bg-gray-100' : '',
@@ -188,33 +179,19 @@ export default function TopNav(props) {
                             >
                                 Progress Tracking
                             </Disclosure.Button>
-                            <Disclosure.Button
-                                as="a"
-                                href="#"
-                                className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700 sm:pl-5 sm:pr-6"
-                            >
-                                Projects
-                            </Disclosure.Button>
-                            <Disclosure.Button
-                                as="a"
-                                href="#"
-                                className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700 sm:pl-5 sm:pr-6"
-                            >
-                                Calendar
-                            </Disclosure.Button>
                         </div>
                         <div className="border-t border-gray-200 pt-4 pb-3">
                             <div className="flex items-center px-4 sm:px-6">
                                 <div className="flex-shrink-0">
                                     <img
                                         className="h-10 w-10 rounded-full"
-                                        src="https://images.unsplash.com/photo-1596797882870-8c33deeac224?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1160&q=80"
+                                        src="https://images.unsplash.com/photo-1563050912-b15276e395c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjZ8fGZpc2h8ZW58MHwyfDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
                                         alt=""
                                     />
                                 </div>
                                 <div className="ml-3">
-                                    <div className="text-base font-medium text-gray-800">Andrew McDonald</div>
-                                    <div className="text-sm font-medium text-gray-500">andymac@gmail.com</div>
+                                    <div className="text-base font-medium text-gray-800">Adeep Seaman</div>
+                                    <div className="text-sm font-medium text-gray-500">murry.cohd@gmail.com</div>
                                 </div>
                                 <button
                                     type="button"

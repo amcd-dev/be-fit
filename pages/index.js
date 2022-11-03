@@ -1,3 +1,7 @@
+import {useRouter} from "next/router";
+
 export default function Home() {
-  return <h1 className="text-4xl font-bold underline">Hello World, Next.js!!</h1>
+  const router = useRouter()
+  router.push('/dashboard/home')
+  return <h1 className="text-4xl font-bold underline">Loading</h1>
 }
