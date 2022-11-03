@@ -7,6 +7,7 @@ import IconAgility from "./icons/IconAgility";
 import IconStretch from "./icons/IconStretch";
 import ExerciseExpanded from "./ExerciseExpanded";
 import {useState} from "react";
+import DeleteActivity from "./DeleteActivity";
 
 
 
@@ -79,6 +80,15 @@ export default function NewDayFeed(props) {
             },
         ]
     )
+
+    //Functions
+    const handleRemoveActivity =(id) => {
+        timeline.map((activity, index) => {
+            if (activity.id === id) {
+                timeline.splice(index, 1)
+            }
+        })
+    }
 
     return (
         <div className="flow-root">
