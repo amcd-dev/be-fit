@@ -36,7 +36,7 @@ export default function NewDayFeed(props) {
                 date: '3 x 6m',
                 datetime: '2020-09-22',
                 icon: IconAgility,
-                iconBackground: 'bg-green-500',
+                iconBackground: 'bg-purple-500',
             },
             {
                 id: 3,
