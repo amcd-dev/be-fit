@@ -2,9 +2,16 @@ import {Fragment, useEffect, useRef, useState} from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { CheckIcon } from '@heroicons/react/24/outline'
 import ActivityTypeDropdown from "./form-components/ActivityTypeDropdown";
+import BasicInputField from "./form-components/BasicInputField";
+import BasicTextAreaField from "./form-components/BasicTextAreaField";
 
 export default function EditActivity(props) {
     const [open, setOpen] = useState(false)
+    const [strengthEdit, setStrengthEdit] = useState({
+        sets: 0,
+        reps: 0,
+        weight: 0,
+    })
 
     const cancelButtonRef = useRef(null)
 
@@ -51,13 +58,39 @@ export default function EditActivity(props) {
                                         <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
                                             Edit Activity
                                         </Dialog.Title>
+
+                                        {/*Form content below*/}
+                                        {/* Ternary statement to check what type of exercise for what type of form */}
                                         <ActivityTypeDropdown />
-                                        <div className="mt-2">
-                                            <p className="text-sm text-gray-500">
-                                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius aliquam laudantium explicabo
-                                                pariatur iste dolorem animi vitae error totam. At sapiente aliquam accusamus facere veritatis.
-                                            </p>
+                                        <div className='flex'>
+                                            <BasicInputField
+                                                label='sets'
+                                                inputType='number'
+                                                name='sets'
+                                                id='sets'
+                                                placeholder='3'
+                                            />
+                                            <BasicInputField
+                                                label='reps'
+                                                inputType='number'
+                                                name='reps'
+                                                id='reps'
+                                                placeholder='12'
+                                            />
+                                            <BasicInputField
+                                                label='kg'
+                                                inputType='number'
+                                                name='kg'
+                                                id='kg'
+                                                placeholder='55'
+                                            />
                                         </div>
+                                        <BasicTextAreaField
+
+                                        />
+
+                                        {/*Form content above*/}
+
                                     </div>
                                 </div>
                                 <div className="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">

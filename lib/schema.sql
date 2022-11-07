@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS befit_user (
     height_ft_in INTEGER
 );
 
-CREATE TABLE IF NOT EXISTS gym_exercise (
+CREATE TABLE IF NOT EXISTS strength_activity (
     id SERIAL PRIMARY KEY,
     uid TEXT,
     day VARCHAR(10),
