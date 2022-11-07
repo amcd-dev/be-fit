@@ -16,11 +16,24 @@ export default function ExerciseExpanded() {
             <EditActivity modalOpen ={editModalOpen} closeModal={() => setEditModalOpen(false)} />
 
             <ul role="list" className="divide-y divide-gray-100">
-                <li className="px-4 py-4 sm:px-6">
-                    {/* Your content */}
+                <li className="flex justify-around px-4 py-4 sm:px-6">
+                    <span className="inline-flex items-center rounded bg-blue-100 px-2 py-0.5 text-sm font-medium text-blue-800">
+                        Sets:
+                    </span>
+                    <span className='inline-flex items-center rounded px-2 py-0.5 text-sm font-medium text-gray-800'>3</span>
+                    <span className="inline-flex items-center rounded bg-blue-100 px-2 py-0.5 text-sm font-medium text-blue-800">
+                        Reps:
+                    </span>
+                    <span className='inline-flex items-center rounded px-2 py-0.5 text-sm font-medium text-gray-800'>3</span>
+                    <span className="inline-flex items-center rounded bg-blue-100 px-2 py-0.5 text-sm font-medium text-blue-800">
+                        kg:
+                    </span>
+                    <span className='inline-flex items-center rounded px-2 py-0.5 text-sm font-medium text-gray-800'>3</span>
                 </li>
-                <li className="px-4 py-4 sm:px-6">
-                    {/* Your content */}
+                <li className="flex justify-start px-4 py-4 sm:px-6">
+                    <span className="inline-flex items-center rounded bg-yellow-100 px-2 py-0.5 text-sm font-medium text-yellow-800">
+                        Notes:
+                    </span>
                 </li>
                 <li className="px-4  sm:px-6">
                     <div className="relative">

@@ -16,10 +16,12 @@ function classNames(...classes) {
 }
 
 export default function NewDayFeed(props) {
+    const currentDay = props.selectedDay
     const [timeline, setTimeLine] = useState(
         [
             {
                 id: 1,
+                day: 'Mon',
                 content: 'Cardio',
                 target: 'Run',
                 href: '#',
@@ -30,8 +32,9 @@ export default function NewDayFeed(props) {
             },
             {
                 id: 2,
-                content: 'Cardio',
-                target: 'Agility',
+                day: 'Sat',
+                content: 'Agility',
+                target: 'Cones sprint',
                 href: '#',
                 date: '3 x 6m',
                 datetime: '2020-09-22',
@@ -40,6 +43,7 @@ export default function NewDayFeed(props) {
             },
             {
                 id: 3,
+                day: 'Mon',
                 content: 'Stretch',
                 target: 'Groin Exercise',
                 href: '#',
@@ -50,6 +54,7 @@ export default function NewDayFeed(props) {
             },
             {
                 id: 4,
+                day: 'Mon',
                 content: 'Strength',
                 target: 'Pull Ups',
                 href: '#',
@@ -60,6 +65,7 @@ export default function NewDayFeed(props) {
             },
             {
                 id: 5,
+                day: 'Mon',
                 content: 'Strength',
                 target: 'Bench Press',
                 href: '#',
@@ -70,6 +76,7 @@ export default function NewDayFeed(props) {
             },
             {
                 id: 6,
+                day: 'Mon',
                 content: 'Strength',
                 target: 'Seated Row',
                 href: '#',
@@ -94,11 +101,9 @@ export default function NewDayFeed(props) {
         <div className="flow-root">
             <Reorder.Group values={timeline} onReorder={setTimeLine} className="my-2">
                 {timeline.map((event, eventIdx) => (
+                    currentDay === event.day ? //Only renders activities which match selected day
                     <Reorder.Item className="" key={event.id} value={event}>
                         <div className="relative pb-6">
-                            {/*{eventIdx !== timeline.length - 1 ? (*/}
-                            {/*    <span className="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true" />*/}
-                            {/*) : null}*/}
                             <Disclosure>
                                 <div className="relative flex space-x-3">
                                     <div>
@@ -132,7 +137,7 @@ export default function NewDayFeed(props) {
                                 </Disclosure.Panel>
                             </Disclosure>
                         </div>
-                    </Reorder.Item>
+                    </Reorder.Item> : null
                 ))}
             </Reorder.Group>
         </div>

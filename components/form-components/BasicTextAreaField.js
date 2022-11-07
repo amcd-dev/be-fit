@@ -1,8 +1,8 @@
 
 
-export default function BasicTextAreaField() {
+export default function BasicTextAreaField(props) {
     return (
-        <div className='mt-5'>
+        <div className='mt-6'>
             <label htmlFor="comment" className="block text-sm font-medium text-gray-700">
                 Activity Notes
             </label>
@@ -11,8 +11,9 @@ export default function BasicTextAreaField() {
             rows={6}
             name="comment"
             id="comment"
-            className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+            className="block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
             defaultValue={''}
+            onChange={(event) => {props.onChange(event.target.value)}}
         />
             </div>
         </div>

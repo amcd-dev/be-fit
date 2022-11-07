@@ -53,8 +53,8 @@ export default function Example() {
         <Listbox value={selected} onChange={setSelected}>
             {({ open }) => (
                 <>
-                    <Listbox.Label className="block text-sm font-medium text-gray-700">[placeholder]</Listbox.Label>
-                    <div className="relative mt-1">
+                    <Listbox.Label className="block mt-5 text-sm font-medium text-gray-700">Activity Type</Listbox.Label>
+                    <div className="relative mt-1 mb-4">
                         <Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
                             <span className="flex items-center">
                                 <span
@@ -80,7 +80,7 @@ export default function Example() {
                             leaveFrom="opacity-100"
                             leaveTo="opacity-0"
                         >
-                            <Listbox.Options className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                            <Listbox.Options className="absolute z-10 mt-1 max-h-90 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                                 {people.map((person) => (
                                     <Listbox.Option
                                         key={person.id}
