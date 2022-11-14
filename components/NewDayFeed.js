@@ -10,6 +10,7 @@ import {useEffect, useState} from "react";
 import {useAuth} from "../context/AuthContext";
 import NoTimelineMessage from "./NoTimelineMessage";
 import Loading from "./Loading";
+import AddActivity from "./AddActivity";
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -22,28 +23,24 @@ export default function NewDayFeed(props) {
 
     const [isLoading, setLoading] = useState(false)
     const [timeline, setTimeLine] = useState([])
-    console.log('>>> Logging timeline on page render', timeline)
+    const [addActivityOpen, setAddActivityOpen] = useState(false)
+
+    // console.log('>>> Logging timeline on page render', timeline)
+    // console.log('][ ][ Day Feed Page render ][ ][')
 
     useEffect(() => { //Fetches the timeline on page load
         console.log('>>> Triggering useEffect fetch for timeline')
-        async function fetchTimeLine() {
-            setLoading(true)
-            const response = await fetch(`http://localhost:3000/api/test?uid=sddasd4&day=${currentDay}`)
-            setTimeLine(await response.json())
-            await setLoading(false)
-        }
         fetchTimeLine()
-        console.log('>>> logging timeline after fetch',timeline)
-    },[currentDay]) //re-fetches everytime user selects a new day. Could rejig this to only re-fetch on edits, deletes and adds?
+    },[currentDay, addActivityOpen]) //re-fetches everytime user selects a new day. Could rejig this to only re-fetch on edits, deletes and adds?
 
     //Functions
-    const handleRemoveActivity =(id) => {
-        timeline.map((activity, index) => {
-            if (activity.id === id) {
-                timeline.splice(index, 1)
-            }
-        })
+    async function fetchTimeLine() {
+        setLoading(true)
+        const response = await fetch(`http://localhost:3000/api/test?uid=${user.uid}&day=${currentDay}`)
+        setTimeLine(await response.json())
+        await setLoading(false)
     }
+
 
     const iconRender = (activityType) => { //renders different fields depending on the activity type
         if (activityType === 'Strength') {
@@ -93,7 +90,7 @@ export default function NewDayFeed(props) {
         }
     }
 
-    const typeRender = (activityType, event) => {
+    const typeRender = (activityType, event) => { //renders different activity attributes depending on type
         if (activityType === 'Strength') {
             return (
                 <div className="whitespace-nowrap text-right text-sm text-gray-500">
@@ -128,7 +125,38 @@ export default function NewDayFeed(props) {
     if (isLoading) return (
         <Loading />
     )
-    if (timeline.length === 0) return <NoTimelineMessage />
+    if (timeline.length === 0) return (
+        <div>
+            <NoTimelineMessage />
+            <div className="flex-shrink-0">
+                <button
+                    onClick={() => {setAddActivityOpen(true)}}
+                    type="button"
+                    className="relative inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                >
+                    <svg
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={1.5}
+                        viewBox="0 0 24 24"
+                        height="2em"
+                        width="2em"
+                    >
+                        <path stroke="none" d="M0 0h24v24H0z" />
+                        <path d="M4 8V6a2 2 0 012-2h2M4 16v2a2 2 0 002 2h2M16 4h2a2 2 0 012 2v2M16 20h2a2 2 0 002-2v-2M8.603 9.61a2.04 2.04 0 012.912 0L12 10l.5-.396a2.035 2.035 0 012.897.007 2.104 2.104 0 010 2.949L12 16l-3.397-3.44a2.104 2.104 0 010-2.95z" />
+                    </svg>
+                    <span className="ml-2">Add Activity</span>
+                </button>
+            </div>
+            <AddActivity
+                modalOpen ={addActivityOpen}
+                closeModal={() => setAddActivityOpen(false)}
+            />
+        </div>
+
+    )
 
     return (
         <div className="flow-root">
@@ -147,10 +175,11 @@ export default function NewDayFeed(props) {
                                     <div className="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
                                         <div>
                                             <p className="text-sm text-gray-500">
-                                                [{event.type}]{' '}
+
                                                 <a href={event.href} className="font-medium text-gray-900">
                                                     {event.activity}
                                                 </a>
+                                                {' '}[{event.type}]
                                             </p>
                                         </div>
                                         <div className="whitespace-nowrap text-right text-sm text-gray-500">
@@ -159,13 +188,48 @@ export default function NewDayFeed(props) {
                                     </div>
                                 </div>
                                 <Disclosure.Panel>
-                                    <ExerciseExpanded />
+                                    <ExerciseExpanded
+                                        sets={event.sets}
+                                        reps={event.reps}
+                                        kg={event.weight_kg}
+                                        notes={event.notes}
+                                        id={event.id}
+                                        refreshFeed={() => {
+                                            fetchTimeLine() //TODO add pop up confirmation
+                                        }}
+                                    />
                                 </Disclosure.Panel>
                             </Disclosure>
                         </div>
                     </Reorder.Item> : null //don't render the activity if it doesn't match selected day
                 ))}
             </Reorder.Group>
+            <div className="flex-shrink-0">
+                <button
+                    onClick={() => {setAddActivityOpen(true)}}
+                    type="button"
+                    className="relative inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                >
+                    <svg
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={1.5}
+                        viewBox="0 0 24 24"
+                        height="2em"
+                        width="2em"
+                    >
+                        <path stroke="none" d="M0 0h24v24H0z" />
+                        <path d="M4 8V6a2 2 0 012-2h2M4 16v2a2 2 0 002 2h2M16 4h2a2 2 0 012 2v2M16 20h2a2 2 0 002-2v-2M8.603 9.61a2.04 2.04 0 012.912 0L12 10l.5-.396a2.035 2.035 0 012.897.007 2.104 2.104 0 010 2.949L12 16l-3.397-3.44a2.104 2.104 0 010-2.95z" />
+                    </svg>
+                    <span className="ml-2">Add Activity</span>
+                </button>
+            </div>
+            <AddActivity
+                modalOpen ={addActivityOpen}
+                closeModal={() => setAddActivityOpen(false)}
+            />
         </div>
     )
 }

@@ -5,15 +5,18 @@ import ActivityTypeDropdown from "./form-components/ActivityTypeDropdown";
 import BasicInputField from "./form-components/BasicInputField";
 import BasicTextAreaField from "./form-components/BasicTextAreaField";
 import DaySelectInput from "./form-components/DaySelectInput";
+import {useAuth} from "../context/AuthContext";
 
 export default function AddActivity(props) {
+    const { user } = useAuth()
     const [open, setOpen] = useState(false)
     const [activityAdd, setActivityAdd] = useState({
         day: 'Mon',
+        name: 'Test activity',
         type: 'Strength',
         sets: 0,
         reps: 0,
-        kg: 0,
+        weight_kg: 0,
         notes: ''
     })
 
@@ -28,12 +31,28 @@ export default function AddActivity(props) {
     //Functions
     const handleSave = async (activityObject) => {
         event.preventDefault()
+
         const reqOptions = {
-            method: 'PUT'
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                day: activityObject.day,
+                type: activityObject.type,
+                activityName: activityObject.name,
+                sets: activityObject.sets,
+                reps: activityObject.reps,
+                weight_kg: activityObject.weight_kg,
+                notes: activityObject.notes,
+            })
         }
-        const response = await fetch(`http://localhost:3000/api/add_activity?uid=sddasd4&day=${activityObject.day}&activityName=placeholder&type=${activityObject.type}&notes=${activityObject.notes}`, reqOptions)
-        console.log('>>> logging post response: ', await response.json())
-        // console.log('The new settings that have been saved are:', activityAdd, ' Performing DB update')
+
+        const response = await fetch(`http://localhost:3000/api/add_activity?uid=${user.uid}`, reqOptions)
+
+        await props.closeModal()
+        // await console.log('>>> logging post response: ', await response.json())
     }
 
     return (
@@ -89,6 +108,20 @@ export default function AddActivity(props) {
                                                 })
                                             }}
                                         />
+                                        <BasicInputField
+                                            label='Activity Name'
+                                            inputType='Text'
+                                            name='name'
+                                            id='name'
+                                            placeholder='e.g. Bench-press or Swim'
+                                            onChange={(value) => {
+                                                setActivityAdd({
+                                                    ...activityAdd,
+                                                    name: value
+                                                })}
+                                            }
+
+                                        />
                                         <div className='flex'>
                                             <BasicInputField
                                                 label='sets'
@@ -125,7 +158,7 @@ export default function AddActivity(props) {
                                                 onChange={(value) => {
                                                     setActivityAdd({
                                                         ...activityAdd,
-                                                        kg: value
+                                                        weight_kg: value
                                                     })}
                                                 }
                                             />
@@ -147,11 +180,7 @@ export default function AddActivity(props) {
                                         type="button"
                                         className="inline-flex w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:col-start-2 sm:text-sm"
                                         // onClick={() => setOpen(false)}
-                                        onClick={() => {
-                                            handleSave(activityAdd)
-                                            props.closeModal()
-                                        }}
-                                    >
+                                        onClick={() => {handleSave(activityAdd)}}>
                                         Save Changes
                                     </button>
                                     <button

@@ -2,38 +2,58 @@ import {useState} from "react";
 import { PencilIcon, TrashIcon } from '@heroicons/react/20/solid'
 import DeleteActivity from "./DeleteActivity";
 import EditActivity from "./EditActivity";
+import {useAuth} from "../context/AuthContext";
 
 
-export default function ExerciseExpanded() {
+export default function ExerciseExpanded(props) {
+    const { user } = useAuth()
     const [deleteModalOpen, setDeleteModalOpen] = useState(false)
     const [editModalOpen, setEditModalOpen] = useState(false)
+
+    const handleDeleteActivity = async (activityId) => {
+        event.preventDefault()
+        const reqOptions = {
+            method: 'DELETE'
+        }
+        const response = await fetch(`http://localhost:3000/api/delete_activity?uid=${user.uid}&id=${activityId}`)
+        await props.refreshFeed()
+    }
 
     return (
         <div className="overflow-hidden bg-white mt-4 shadow sm:rounded-md">
 
             {/*{deleteModalOpen ? <DeleteActivity closeModal={() => setDeleteModalOpen(false)} /> : null}*/}
-            <DeleteActivity modalOpen={deleteModalOpen} closeModal={() => setDeleteModalOpen(false)} />
-            <EditActivity modalOpen ={editModalOpen} closeModal={() => setEditModalOpen(false)} />
+            <DeleteActivity
+                modalOpen={deleteModalOpen}
+                closeModal={() => setDeleteModalOpen(false)}
+                delete={() => handleDeleteActivity(props.id)}
+            />
+            <EditActivity
+                modalOpen ={editModalOpen}
+                closeModal={() => setEditModalOpen(false)}
+            />
 
             <ul role="list" className="divide-y divide-gray-100">
                 <li className="flex justify-around px-4 py-4 sm:px-6">
+                    {/*TODO add css for props*/}
                     <span className="inline-flex items-center rounded bg-blue-100 px-2 py-0.5 text-sm font-medium text-blue-800">
                         Sets:
                     </span>
-                    <span className='inline-flex items-center rounded px-2 py-0.5 text-sm font-medium text-gray-800'>3</span>
+                    <span className='inline-flex items-center rounded px-2 py-0.5 text-sm font-medium text-gray-800'>{props.sets}</span>
                     <span className="inline-flex items-center rounded bg-blue-100 px-2 py-0.5 text-sm font-medium text-blue-800">
                         Reps:
                     </span>
-                    <span className='inline-flex items-center rounded px-2 py-0.5 text-sm font-medium text-gray-800'>3</span>
+                    <span className='inline-flex items-center rounded px-2 py-0.5 text-sm font-medium text-gray-800'>{props.reps}</span>
                     <span className="inline-flex items-center rounded bg-blue-100 px-2 py-0.5 text-sm font-medium text-blue-800">
                         kg:
                     </span>
-                    <span className='inline-flex items-center rounded px-2 py-0.5 text-sm font-medium text-gray-800'>3</span>
+                    <span className='inline-flex items-center rounded px-2 py-0.5 text-sm font-medium text-gray-800'>{props.kg}</span>
                 </li>
                 <li className="flex justify-start px-4 py-4 sm:px-6">
                     <span className="inline-flex items-center rounded bg-yellow-100 px-2 py-0.5 text-sm font-medium text-yellow-800">
                         Notes:
                     </span>
+                    <span> {props.notes}</span>
                 </li>
                 <li className="px-4  sm:px-6">
                     <div className="relative">

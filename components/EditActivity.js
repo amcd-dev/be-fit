@@ -8,12 +8,13 @@ import BasicTextAreaField from "./form-components/BasicTextAreaField";
 export default function EditActivity(props) {
     const [open, setOpen] = useState(false)
     const [strengthEdit, setStrengthEdit] = useState({
+        day: 'Mon',
+        type: 'Strength',
         sets: 0,
         reps: 0,
         kg: 0,
         notes: ''
     })
-    console.log('>>> logging strength object: ', strengthEdit)
 
     useEffect(() => {
         if (props.modalOpen) {
@@ -67,7 +68,15 @@ export default function EditActivity(props) {
 
                                         {/*Form content below*/}
                                         {/* Ternary statement to check what type of exercise for what type of form */}
-                                        <ActivityTypeDropdown />
+                                        <ActivityTypeDropdown
+                                            handleAddType={(activityType) => {
+                                                setStrengthEdit({
+                                                    ...setStrengthEdit,
+                                                    type: activityType
+                                                })
+                                            }}
+
+                                        />
                                         <div className='flex'>
                                             <BasicInputField
                                                 label='sets'
