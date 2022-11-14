@@ -17,8 +17,14 @@ CREATE TABLE IF NOT EXISTS strength_activity (
     type VARCHAR(20),
     weight_kg REAL,
     weight_lb INTEGER,
+    distance_km REAL,
+    distance_mi REAL,
+    distance_m REAL,
+    distance_yd REAL,
+    incline INTEGER,
+    duration_min REAL,
     sets INTEGER,
     reps INTEGER,
     difficulty INTEGER,
     notes TEXT
-)
+);

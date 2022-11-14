@@ -8,8 +8,9 @@ import DaySelectInput from "./form-components/DaySelectInput";
 
 export default function AddActivity(props) {
     const [open, setOpen] = useState(false)
-    const [strengthAdd, setStrengthAdd] = useState({
-        day: '',
+    const [activityAdd, setActivityAdd] = useState({
+        day: 'Mon',
+        type: 'Strength',
         sets: 0,
         reps: 0,
         kg: 0,
@@ -25,9 +26,14 @@ export default function AddActivity(props) {
     })
 
     //Functions
-    const handleSave = () => {
+    const handleSave = async (activityObject) => {
         event.preventDefault()
-        console.log('The new settings that have been saved are:', strengthAdd, ' Performing DB update')
+        const reqOptions = {
+            method: 'PUT'
+        }
+        const response = await fetch(`http://localhost:3000/api/add_activity?uid=sddasd4&day=${activityObject.day}&activityName=placeholder&type=${activityObject.type}&notes=${activityObject.notes}`, reqOptions)
+        console.log('>>> logging post response: ', await response.json())
+        // console.log('The new settings that have been saved are:', activityAdd, ' Performing DB update')
     }
 
     return (
@@ -69,13 +75,20 @@ export default function AddActivity(props) {
                                         {/* Ternary statement to check what type of exercise for what type of form */}
                                         <DaySelectInput
                                             onChange={(value) => {
-                                                setStrengthAdd({
-                                                    ...strengthAdd,
+                                                setActivityAdd({
+                                                    ...activityAdd,
                                                     day: value
                                                 })}
                                             }
                                         />
-                                        <ActivityTypeDropdown />
+                                        <ActivityTypeDropdown
+                                            handleAddType={(activityType) => {
+                                                setActivityAdd({
+                                                    ...activityAdd,
+                                                    type: activityType
+                                                })
+                                            }}
+                                        />
                                         <div className='flex'>
                                             <BasicInputField
                                                 label='sets'
@@ -84,8 +97,8 @@ export default function AddActivity(props) {
                                                 id='sets'
                                                 placeholder='3'
                                                 onChange={(value) => {
-                                                    setStrengthAdd({
-                                                        ...strengthAdd,
+                                                    setActivityAdd({
+                                                        ...activityAdd,
                                                         sets: value
                                                     })}
                                             }
@@ -97,8 +110,8 @@ export default function AddActivity(props) {
                                                 id='reps'
                                                 placeholder='12'
                                                 onChange={(value) => {
-                                                    setStrengthAdd({
-                                                        ...strengthAdd,
+                                                    setActivityAdd({
+                                                        ...activityAdd,
                                                         reps: value
                                                     })}
                                                 }
@@ -110,8 +123,8 @@ export default function AddActivity(props) {
                                                 id='kg'
                                                 placeholder='55'
                                                 onChange={(value) => {
-                                                    setStrengthAdd({
-                                                        ...strengthAdd,
+                                                    setActivityAdd({
+                                                        ...activityAdd,
                                                         kg: value
                                                     })}
                                                 }
@@ -119,8 +132,8 @@ export default function AddActivity(props) {
                                         </div>
                                         <BasicTextAreaField
                                             onChange={(value) => {
-                                                setStrengthAdd({
-                                                    ...strengthAdd,
+                                                setActivityAdd({
+                                                    ...activityAdd,
                                                     notes: value
                                                 })}
                                             }
@@ -135,7 +148,7 @@ export default function AddActivity(props) {
                                         className="inline-flex w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:col-start-2 sm:text-sm"
                                         // onClick={() => setOpen(false)}
                                         onClick={() => {
-                                            handleSave(strengthAdd)
+                                            handleSave(activityAdd)
                                             props.closeModal()
                                         }}
                                     >

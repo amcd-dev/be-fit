@@ -16,7 +16,7 @@ function classNames(...classes) {
 }
 
 export default function DaySelectInput(props) {
-    const [mem, setMem] = useState(memoryOptions[1])
+    const [mem, setMem] = useState(memoryOptions[0])
 
     return (
         <div>

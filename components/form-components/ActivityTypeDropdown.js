@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react'
+import {Fragment, useEffect, useState} from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import IconRun from "../icons/IconRun";
@@ -46,8 +46,12 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function Example() {
+export default function ActivityTypeDropdown(props) {
     const [selected, setSelected] = useState(people[0])
+
+    useEffect(() => {
+        props.handleAddType(selected.name)
+    },[selected])
 
     return (
         <Listbox value={selected} onChange={setSelected}>

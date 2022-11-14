@@ -242,7 +242,10 @@ export default function TopNav(props) {
                     </>
                 )}
             </Disclosure>
-            <AddActivity modalOpen ={addActivityOpen} closeModal={() => setAddActivityOpen(false)} />
+            <AddActivity
+                modalOpen ={addActivityOpen}
+                closeModal={() => setAddActivityOpen(false)}
+            />
         </>
     )
 }
