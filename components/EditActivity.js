@@ -4,11 +4,14 @@ import { PencilIcon } from '@heroicons/react/24/outline'
 import ActivityTypeDropdown from "./form-components/ActivityTypeDropdown";
 import BasicInputField from "./form-components/BasicInputField";
 import BasicTextAreaField from "./form-components/BasicTextAreaField";
+import {useAuth} from "../context/AuthContext";
 
 export default function EditActivity(props) {
+    const { user } = useAuth()
     const [open, setOpen] = useState(false)
     const [strengthEdit, setStrengthEdit] = useState({
         day: 'Mon',
+        name: '',
         type: 'Strength',
         sets: 0,
         reps: 0,
@@ -25,9 +28,28 @@ export default function EditActivity(props) {
     })
 
     //Functions
-    const handleSave = () => {
+    const handleSave = async (editedActivityObject) => {
         event.preventDefault()
-        console.log('The new settings that have been saved are:', strengthEdit, ' Performing DB update')
+
+        const reqOptions = {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ //Below ternary conditions make sure undefined is not being passed through which breaks the postgres update
+                type: editedActivityObject.type ? editedActivityObject.type : props.selectedActivity.type,
+                activityName: editedActivityObject.name ? editedActivityObject.name : props.selectedActivity.activity,
+                sets: editedActivityObject.sets ? editedActivityObject.sets : props.selectedActivity.sets,
+                reps: editedActivityObject.reps ? editedActivityObject.reps : props.selectedActivity.reps,
+                weight_kg: editedActivityObject.kg ? editedActivityObject.kg : props.selectedActivity.weight_kg,
+                notes: editedActivityObject.notes ? editedActivityObject.notes : props.selectedActivity.notes,
+            })
+        }
+
+        const response = await fetch(`http://localhost:3000/api/edit_activity?uid=${user.uid}&id=${props.selectedActivity.id}`, reqOptions)
+        console.log('The new settings that have been saved are:', editedActivityObject, ' Performing DB update')
+        await props.closeModal()
     }
 
     return (
@@ -65,10 +87,11 @@ export default function EditActivity(props) {
                                         <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
                                             Edit Activity
                                         </Dialog.Title>
-
                                         {/*Form content below*/}
                                         {/* Ternary statement to check what type of exercise for what type of form */}
+                                        {/*//TODO find way to stop dropdown being default selected, so if nothing is changed, no api call is made*/}
                                         <ActivityTypeDropdown
+                                            activityType={props.selectedActivity.type}
                                             handleAddType={(activityType) => {
                                                 setStrengthEdit({
                                                     ...setStrengthEdit,
@@ -77,13 +100,26 @@ export default function EditActivity(props) {
                                             }}
 
                                         />
+                                        <BasicInputField
+                                            label='Activity Name'
+                                            inputType='Text'
+                                            name='name'
+                                            id='name'
+                                            placeholder={props.selectedActivity.activity}
+                                            onChange={(value) => {
+                                                setStrengthEdit({
+                                                    ...strengthEdit,
+                                                    name: value
+                                                })}
+                                            }
+                                        />
                                         <div className='flex'>
                                             <BasicInputField
                                                 label='sets'
                                                 inputType='number'
                                                 name='sets'
                                                 id='sets'
-                                                placeholder='3'
+                                                placeholder={props.selectedActivity.sets}
                                                 onChange={(value) => {
                                                     setStrengthEdit({
                                                         ...strengthEdit,
@@ -96,7 +132,7 @@ export default function EditActivity(props) {
                                                 inputType='number'
                                                 name='reps'
                                                 id='reps'
-                                                placeholder='12'
+                                                placeholder={props.selectedActivity.reps}
                                                 onChange={(value) => {
                                                     setStrengthEdit({
                                                         ...strengthEdit,
@@ -109,7 +145,7 @@ export default function EditActivity(props) {
                                                 inputType='number'
                                                 name='kg'
                                                 id='kg'
-                                                placeholder='55'
+                                                placeholder={props.selectedActivity.weight_kg}
                                                 onChange={(value) => {
                                                     setStrengthEdit({
                                                         ...strengthEdit,
@@ -119,6 +155,7 @@ export default function EditActivity(props) {
                                             />
                                         </div>
                                         <BasicTextAreaField
+                                            currentValue={props.selectedActivity.notes}
                                             onChange={(value) => {
                                                 setStrengthEdit({
                                                     ...strengthEdit,
@@ -137,7 +174,6 @@ export default function EditActivity(props) {
                                         // onClick={() => setOpen(false)}
                                         onClick={() => {
                                             handleSave(strengthEdit)
-                                            props.closeModal()
                                         }}
                                     >
                                         Save Changes

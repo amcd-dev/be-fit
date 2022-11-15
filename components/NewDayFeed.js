@@ -189,11 +189,7 @@ export default function NewDayFeed(props) {
                                 </div>
                                 <Disclosure.Panel>
                                     <ExerciseExpanded
-                                        sets={event.sets}
-                                        reps={event.reps}
-                                        kg={event.weight_kg}
-                                        notes={event.notes}
-                                        id={event.id}
+                                        exerciseObject={event}
                                         refreshFeed={() => {
                                             fetchTimeLine() //TODO add pop up confirmation
                                         }}

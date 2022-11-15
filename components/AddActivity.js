@@ -101,6 +101,7 @@ export default function AddActivity(props) {
                                             }
                                         />
                                         <ActivityTypeDropdown
+                                            activityType={activityAdd.type}
                                             handleAddType={(activityType) => {
                                                 setActivityAdd({
                                                     ...activityAdd,
@@ -120,7 +121,6 @@ export default function AddActivity(props) {
                                                     name: value
                                                 })}
                                             }
-
                                         />
                                         <div className='flex'>
                                             <BasicInputField

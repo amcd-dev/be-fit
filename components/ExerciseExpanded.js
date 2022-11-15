@@ -26,11 +26,12 @@ export default function ExerciseExpanded(props) {
             <DeleteActivity
                 modalOpen={deleteModalOpen}
                 closeModal={() => setDeleteModalOpen(false)}
-                delete={() => handleDeleteActivity(props.id)}
+                delete={() => handleDeleteActivity(props.exerciseObject.id)}
             />
             <EditActivity
                 modalOpen ={editModalOpen}
                 closeModal={() => setEditModalOpen(false)}
+                selectedActivity={props.exerciseObject}
             />
 
             <ul role="list" className="divide-y divide-gray-100">
@@ -39,21 +40,21 @@ export default function ExerciseExpanded(props) {
                     <span className="inline-flex items-center rounded bg-blue-100 px-2 py-0.5 text-sm font-medium text-blue-800">
                         Sets:
                     </span>
-                    <span className='inline-flex items-center rounded px-2 py-0.5 text-sm font-medium text-gray-800'>{props.sets}</span>
+                    <span className='inline-flex items-center rounded px-2 py-0.5 text-sm font-medium text-gray-800'>{props.exerciseObject.sets}</span>
                     <span className="inline-flex items-center rounded bg-blue-100 px-2 py-0.5 text-sm font-medium text-blue-800">
                         Reps:
                     </span>
-                    <span className='inline-flex items-center rounded px-2 py-0.5 text-sm font-medium text-gray-800'>{props.reps}</span>
+                    <span className='inline-flex items-center rounded px-2 py-0.5 text-sm font-medium text-gray-800'>{props.exerciseObject.reps}</span>
                     <span className="inline-flex items-center rounded bg-blue-100 px-2 py-0.5 text-sm font-medium text-blue-800">
                         kg:
                     </span>
-                    <span className='inline-flex items-center rounded px-2 py-0.5 text-sm font-medium text-gray-800'>{props.kg}</span>
+                    <span className='inline-flex items-center rounded px-2 py-0.5 text-sm font-medium text-gray-800'>{props.exerciseObject.weight_kg}</span>
                 </li>
                 <li className="flex justify-start px-4 py-4 sm:px-6">
                     <span className="inline-flex items-center rounded bg-yellow-100 px-2 py-0.5 text-sm font-medium text-yellow-800">
                         Notes:
                     </span>
-                    <span> {props.notes}</span>
+                    <span> {props.exerciseObject.notes}</span>
                 </li>
                 <li className="px-4  sm:px-6">
                     <div className="relative">

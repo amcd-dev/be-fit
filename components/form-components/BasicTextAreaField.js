@@ -12,7 +12,7 @@ export default function BasicTextAreaField(props) {
             name="comment"
             id="comment"
             className="block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            defaultValue={''}
+            defaultValue={props.currentValue}
             onChange={(event) => {props.onChange(event.target.value)}}
         />
             </div>

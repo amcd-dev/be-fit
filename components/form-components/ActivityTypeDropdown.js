@@ -6,7 +6,7 @@ import IconAgility from "../icons/IconAgility";
 import IconStretch from "../icons/IconStretch";
 import IconWeightLifter from "../icons/IconWeightLifter";
 
-const people = [
+const activityTypes = [
     {
         id: 1,
         name: 'Strength',
@@ -47,7 +47,8 @@ function classNames(...classes) {
 }
 
 export default function ActivityTypeDropdown(props) {
-    const [selected, setSelected] = useState(people[0])
+
+    const [selected, setSelected] = useState(activityTypes.find(type => type.name === props.activityType))
 
     useEffect(() => {
         props.handleAddType(selected.name)
@@ -85,7 +86,7 @@ export default function ActivityTypeDropdown(props) {
                             leaveTo="opacity-0"
                         >
                             <Listbox.Options className="absolute z-10 mt-1 max-h-90 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                                {people.map((person) => (
+                                {activityTypes.map((person) => (
                                     <Listbox.Option
                                         key={person.id}
                                         className={({ active }) =>
