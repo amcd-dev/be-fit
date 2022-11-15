@@ -1,7 +1,7 @@
 import {Fragment, useState} from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { PlusIcon } from '@heroicons/react/20/solid'
+import {Disclosure, Menu, Transition} from '@headlessui/react'
+import {Bars3Icon, BellIcon, XMarkIcon} from '@heroicons/react/24/outline'
+import {PlusIcon} from '@heroicons/react/20/solid'
 import {useAuth} from "../context/AuthContext";
 import {useRouter} from "next/router";
 import AddActivity from "./AddActivity";
@@ -11,15 +11,15 @@ function classNames(...classes) {
 }
 
 export default function TopNav(props) {
+    const {user, logOut} = useAuth()
     const [addActivityOpen, setAddActivityOpen] = useState(false)
-
-    const { user, logOut } = useAuth()
     const router = useRouter()
 
     return (
         <>
-            <Disclosure as="nav" className="bg-white shadow">
-                {({ open }) => (
+            <Disclosure as="nav"
+                        className="bg-white shadow">
+                {({open}) => (
                     <>
                         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                             <div className="flex h-16 justify-between">
@@ -29,9 +29,11 @@ export default function TopNav(props) {
                                         <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
                                             <span className="sr-only">Open main menu</span>
                                             {open ? (
-                                                <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
+                                                <XMarkIcon className="block h-6 w-6"
+                                                           aria-hidden="true"/>
                                             ) : (
-                                                <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+                                                <Bars3Icon className="block h-6 w-6"
+                                                           aria-hidden="true"/>
                                             )}
                                         </Disclosure.Button>
                                     </div>
@@ -70,11 +72,13 @@ export default function TopNav(props) {
                                             className="rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                                         >
                                             <span className="sr-only">View notifications</span>
-                                            <BellIcon className="h-6 w-6" aria-hidden="true" />
+                                            <BellIcon className="h-6 w-6"
+                                                      aria-hidden="true"/>
                                         </button>
 
                                         {/* Profile dropdown */}
-                                        <Menu as="div" className="relative ml-3">
+                                        <Menu as="div"
+                                              className="relative ml-3">
                                             <div>
                                                 <Menu.Button className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                                                     <span className="sr-only">Open user menu</span>
@@ -96,7 +100,7 @@ export default function TopNav(props) {
                                             >
                                                 <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                                     <Menu.Item>
-                                                        {({ active }) => (
+                                                        {({active}) => (
                                                             <a
                                                                 href="#"
                                                                 className={classNames(
@@ -109,7 +113,7 @@ export default function TopNav(props) {
                                                         )}
                                                     </Menu.Item>
                                                     <Menu.Item>
-                                                        {({ active }) => (
+                                                        {({active}) => (
                                                             <a
                                                                 href="#"
                                                                 className={classNames(
@@ -122,7 +126,7 @@ export default function TopNav(props) {
                                                         )}
                                                     </Menu.Item>
                                                     <Menu.Item>
-                                                        {({ active }) => (
+                                                        {({active}) => (
                                                             <a
                                                                 onClick={() => {
                                                                     logOut()
@@ -173,48 +177,50 @@ export default function TopNav(props) {
                                         />
                                     </div>
                                     <div className="ml-3">
-                                        <div className="text-base font-medium text-gray-800">Adeep Seaman</div>
-                                        <div className="text-sm font-medium text-gray-500">murry.cohd@gmail.com</div>
+                                        <div className="text-base font-medium text-gray-800">Be-Fit User</div>
+                                        <div className="text-sm font-medium text-gray-500">{user ? user.email : null}</div>
                                     </div>
                                     <button
                                         type="button"
                                         className="ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                                     >
                                         <span className="sr-only">View notifications</span>
-                                        <BellIcon className="h-6 w-6" aria-hidden="true" />
+                                        <BellIcon className="h-6 w-6"
+                                                  aria-hidden="true"/>
                                     </button>
                                 </div>
-                                <div className="mt-3 space-y-1">
-                                    <Disclosure.Button
-                                        as="a"
-                                        href="#"
-                                        className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800 sm:px-6"
-                                    >
-                                        Your Profile
-                                    </Disclosure.Button>
-                                    <Disclosure.Button
-                                        as="a"
-                                        href="#"
-                                        className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800 sm:px-6"
-                                    >
-                                        Settings
-                                    </Disclosure.Button>
-                                    <Disclosure.Button
-                                        as="a"
-                                        href='#'
-                                        className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800 sm:px-6"
-                                    >
-                                        {({ close }) => (
-                                            <button
-                                                onClick={() => {
-                                                    logOut()
-                                                }}
-                                            >
-                                                Sign Out
-                                            </button>
-                                        )}
-                                    </Disclosure.Button>
-                                </div>
+                                {user ?
+                                    <div className="mt-3 space-y-1">
+                                        <Disclosure.Button
+                                            as="a"
+                                            href="#"
+                                            className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800 sm:px-6"
+                                        >
+                                            Your Profile
+                                        </Disclosure.Button>
+                                        <Disclosure.Button
+                                            as="a"
+                                            href="#"
+                                            className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800 sm:px-6"
+                                        >
+                                            Settings
+                                        </Disclosure.Button>
+                                        <Disclosure.Button
+                                            as="a"
+                                            href='#'
+                                            className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800 sm:px-6"
+                                        >
+                                            {({close}) => (
+                                                <button
+                                                    onClick={() => {
+                                                        logOut()
+                                                    }}
+                                                >
+                                                    Sign Out
+                                                </button>
+                                            )}
+                                        </Disclosure.Button>
+                                    </div> : null}
                             </div>
                         </Disclosure.Panel>
                     </>

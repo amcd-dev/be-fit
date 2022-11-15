@@ -32,6 +32,7 @@ export default function ExerciseExpanded(props) {
                 modalOpen ={editModalOpen}
                 closeModal={() => setEditModalOpen(false)}
                 selectedActivity={props.exerciseObject}
+                refreshFeed={() => props.refreshFeed()}
             />
 
             <ul role="list" className="divide-y divide-gray-100">

@@ -28,7 +28,7 @@ export default function EditActivity(props) {
     })
 
     //Functions
-    const handleSave = async (editedActivityObject) => {
+    const handleEditActivity = async (editedActivityObject) => {
         event.preventDefault()
 
         const reqOptions = {
@@ -49,6 +49,7 @@ export default function EditActivity(props) {
 
         const response = await fetch(`http://localhost:3000/api/edit_activity?uid=${user.uid}&id=${props.selectedActivity.id}`, reqOptions)
         console.log('The new settings that have been saved are:', editedActivityObject, ' Performing DB update')
+        await props.refreshFeed()
         await props.closeModal()
     }
 
@@ -173,7 +174,7 @@ export default function EditActivity(props) {
                                         className="inline-flex w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:col-start-2 sm:text-sm"
                                         // onClick={() => setOpen(false)}
                                         onClick={() => {
-                                            handleSave(strengthEdit)
+                                            handleEditActivity(strengthEdit)
                                         }}
                                     >
                                         Save Changes
