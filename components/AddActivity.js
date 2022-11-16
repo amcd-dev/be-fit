@@ -17,6 +17,13 @@ export default function AddActivity(props) {
         sets: 0,
         reps: 0,
         weight_kg: 0,
+        weight_lb: 0,
+        distance_km: 0,
+        distance_mi: 0,
+        distance_m: 0,
+        distance_yd: 0,
+        incline: 0,
+        duration_min: 0,
         notes: ''
     })
 
@@ -31,7 +38,6 @@ export default function AddActivity(props) {
     //Functions
     const handleSave = async (activityObject) => {
         event.preventDefault()
-
         const reqOptions = {
             method: 'PUT',
             headers: {
@@ -45,14 +51,269 @@ export default function AddActivity(props) {
                 sets: activityObject.sets,
                 reps: activityObject.reps,
                 weight_kg: activityObject.weight_kg,
+                weight_lb: activityObject.weight_lb,
+                distance_km: activityObject.distance_km,
+                distance_mi: activityObject.distance_mi,
+                distance_m: activityObject.distance_m,
+                distance_yd: activityObject.distance_yd,
+                incline: activityObject.incline,
+                duration_min: activityObject.duration_min,
                 notes: activityObject.notes,
             })
         }
-
         const response = await fetch(`http://localhost:3000/api/add_activity?uid=${user.uid}`, reqOptions)
-
         await props.closeModal()
-        // await console.log('>>> logging post response: ', await response.json())
+
+    }
+
+    const formTypeRender = (activityType) => {
+        if (activityType === 'Strength') {
+            return (
+                <div>
+                    <BasicInputField
+                        label='Activity Name'
+                        inputType='Text'
+                        name='name'
+                        id='name'
+                        placeholder='e.g. Bench-press or Bar Squat'
+                        onChange={(value) => {
+                            setActivityAdd({
+                                ...activityAdd,
+                                name: value
+                            })
+                        }}
+                    />
+                    <div className='flex'>
+                        <BasicInputField
+                            label='sets'
+                            inputType='number'
+                            name='sets'
+                            id='sets'
+                            placeholder='3'
+                            onChange={(value) => {
+                                setActivityAdd({
+                                    ...activityAdd,
+                                    sets: value
+                                })
+                            }}
+                        />
+                        <BasicInputField
+                            label='reps'
+                            inputType='number'
+                            name='reps'
+                            id='reps'
+                            placeholder='12'
+                            onChange={(value) => {
+                                setActivityAdd({
+                                    ...activityAdd,
+                                    reps: value
+                                })
+                            }}
+                        />
+                        <BasicInputField
+                            label='kg'
+                            inputType='number'
+                            name='kg'
+                            id='kg'
+                            placeholder='55'
+                            onChange={(value) => {
+                                setActivityAdd({
+                                    ...activityAdd,
+                                    weight_kg: value
+                                })
+                            }}
+                        />
+                    </div>
+                    <BasicTextAreaField
+                        onChange={(value) => {
+                            setActivityAdd({
+                                ...activityAdd,
+                                notes: value
+                            })
+                        }}
+                    />
+                </div>
+            )
+
+        } else if (activityType === 'Cardio') {
+            return (
+                <div>
+                    <BasicInputField
+                        label='Activity Name'
+                        inputType='Text'
+                        name='name'
+                        id='name'
+                        placeholder='e.g. Run or Swim'
+                        onChange={(value) => {
+                            setActivityAdd({
+                                ...activityAdd,
+                                name: value
+                            })
+                        }}
+                    />
+                    <div className='flex'>
+                        <BasicInputField
+                            label='sets'
+                            inputType='number'
+                            name='sets'
+                            id='sets'
+                            placeholder='1'
+                            onChange={(value) => {
+                                setActivityAdd({
+                                    ...activityAdd,
+                                    sets: value
+                                })
+                            }}
+                        />
+                        <BasicInputField
+                            label='distance'
+                            inputType='number'
+                            name='distance'
+                            id='distance'
+                            placeholder='10'
+                            onChange={(value) => {
+                                setActivityAdd({
+                                    ...activityAdd,
+                                    distance_km: value
+                                })
+                            }}
+                        />
+                        <BasicInputField
+                            label='duration'
+                            inputType='number'
+                            name='duration'
+                            id='duration'
+                            placeholder='25'
+                            onChange={(value) => {
+                                setActivityAdd({
+                                    ...activityAdd,
+                                    duration_min: value
+                                })
+                            }}
+                        />
+                    </div>
+                    <BasicTextAreaField
+                        onChange={(value) => {
+                            setActivityAdd({
+                                ...activityAdd,
+                                notes: value
+                            })
+                        }}
+                    />
+                </div>
+            )
+
+        } else if (activityType === 'Stretch') {
+            return (
+                <div>
+                    <BasicInputField
+                        label='Activity Name'
+                        inputType='Text'
+                        name='name'
+                        id='name'
+                        placeholder='e.g. Hamstring or Groin'
+                        onChange={(value) => {
+                            setActivityAdd({
+                                ...activityAdd,
+                                name: value
+                            })
+                        }}
+                    />
+                    <div className='flex'>
+                        <BasicInputField
+                            label='sets'
+                            inputType='number'
+                            name='sets'
+                            id='sets'
+                            placeholder='3'
+                            onChange={(value) => {
+                                setActivityAdd({
+                                    ...activityAdd,
+                                    sets: value
+                                })
+                            }}
+                        />
+                        <BasicInputField
+                            label='duration'
+                            inputType='number'
+                            name='duration'
+                            id='duration'
+                            placeholder='2'
+                            onChange={(value) => {
+                                setActivityAdd({
+                                    ...activityAdd,
+                                    duration_min: value
+                                })
+                            }}
+                        />
+                    </div>
+                    <BasicTextAreaField
+                        onChange={(value) => {
+                            setActivityAdd({
+                                ...activityAdd,
+                                notes: value
+                            })
+                        }}
+                    />
+                </div>
+            )
+
+        } else if (activityType === 'Agility') {
+            return (
+                <div>
+                    <BasicInputField
+                        label='Activity Name'
+                        inputType='Text'
+                        name='name'
+                        id='name'
+                        placeholder='e.g. Beep Test or Box Jump'
+                        onChange={(value) => {
+                            setActivityAdd({
+                                ...activityAdd,
+                                name: value
+                            })
+                        }}
+                    />
+                    <div className='flex'>
+                        <BasicInputField
+                            label='sets'
+                            inputType='number'
+                            name='sets'
+                            id='sets'
+                            placeholder='3'
+                            onChange={(value) => {
+                                setActivityAdd({
+                                    ...activityAdd,
+                                    sets: value
+                                })
+                            }}
+                        />
+                        <BasicInputField
+                            label='distance'
+                            inputType='number'
+                            name='distance'
+                            id='distance'
+                            placeholder='12'
+                            onChange={(value) => {
+                                setActivityAdd({
+                                    ...activityAdd,
+                                    distance_m: value
+                                })
+                            }}
+                        />
+                    </div>
+                    <BasicTextAreaField
+                        onChange={(value) => {
+                            setActivityAdd({
+                                ...activityAdd,
+                                notes: value
+                            })
+                        }}
+                    />
+                </div>
+            )
+
+        }
     }
 
     return (
@@ -91,7 +352,6 @@ export default function AddActivity(props) {
                                             Add New Activity
                                         </Dialog.Title>
                                         {/*Form content below*/}
-                                        {/* Ternary statement to check what type of exercise for what type of form */}
                                         <DaySelectInput
                                             onChange={(value) => {
                                                 setActivityAdd({
@@ -109,70 +369,8 @@ export default function AddActivity(props) {
                                                 })
                                             }}
                                         />
-                                        <BasicInputField
-                                            label='Activity Name'
-                                            inputType='Text'
-                                            name='name'
-                                            id='name'
-                                            placeholder='e.g. Bench-press or Swim'
-                                            onChange={(value) => {
-                                                setActivityAdd({
-                                                    ...activityAdd,
-                                                    name: value
-                                                })}
-                                            }
-                                        />
-                                        <div className='flex'>
-                                            <BasicInputField
-                                                label='sets'
-                                                inputType='number'
-                                                name='sets'
-                                                id='sets'
-                                                placeholder='3'
-                                                onChange={(value) => {
-                                                    setActivityAdd({
-                                                        ...activityAdd,
-                                                        sets: value
-                                                    })}
-                                            }
-                                            />
-                                            <BasicInputField
-                                                label='reps'
-                                                inputType='number'
-                                                name='reps'
-                                                id='reps'
-                                                placeholder='12'
-                                                onChange={(value) => {
-                                                    setActivityAdd({
-                                                        ...activityAdd,
-                                                        reps: value
-                                                    })}
-                                                }
-                                            />
-                                            <BasicInputField
-                                                label='kg'
-                                                inputType='number'
-                                                name='kg'
-                                                id='kg'
-                                                placeholder='55'
-                                                onChange={(value) => {
-                                                    setActivityAdd({
-                                                        ...activityAdd,
-                                                        weight_kg: value
-                                                    })}
-                                                }
-                                            />
-                                        </div>
-                                        <BasicTextAreaField
-                                            onChange={(value) => {
-                                                setActivityAdd({
-                                                    ...activityAdd,
-                                                    notes: value
-                                                })}
-                                            }
-                                        />
-                                        {/*Form content above*/}
-
+                                        {/* Depending on activity type renders a different form for the user */}
+                                        {formTypeRender(activityAdd.type)}
                                     </div>
                                 </div>
                                 <div className="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">

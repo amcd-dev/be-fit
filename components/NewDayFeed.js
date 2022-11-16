@@ -43,6 +43,7 @@ export default function NewDayFeed(props) {
 
 
     const iconRender = (activityType) => { //renders different fields depending on the activity type
+        //TODO simplify / clean up into individual component
         if (activityType === 'Strength') {
             return (
                 <span
@@ -91,6 +92,7 @@ export default function NewDayFeed(props) {
     }
 
     const typeRender = (activityType, event) => { //renders different activity attributes depending on type
+        //TODO simplify / clean up into individual component
         if (activityType === 'Strength') {
             return (
                 <div className="whitespace-nowrap text-right text-sm text-gray-500">
@@ -102,21 +104,21 @@ export default function NewDayFeed(props) {
             return (
                 <div className="whitespace-nowrap text-right text-sm text-gray-500">
                     <time dateTime={event.datetime}>{event.date}</time>
-                    {event.weight_kg}kg @ {event.sets} x {event.reps}
+                    {event.sets} x {event.distance_km}km or {event.duration_min} min(s)
                 </div>
             )
         } else if (activityType === 'Stretch') {
             return (
                 <div className="whitespace-nowrap text-right text-sm text-gray-500">
                     <time dateTime={event.datetime}>{event.date}</time>
-                    {event.weight_kg}kg @ {event.sets} x {event.reps}
+                    {event.sets} x {event.duration_min}min(s)
                 </div>
             )
         } else if (activityType === 'Agility') {
             return (
                 <div className="whitespace-nowrap text-right text-sm text-gray-500">
                     <time dateTime={event.datetime}>{event.date}</time>
-                    {event.weight_kg}kg @ {event.sets} x {event.reps}
+                    {event.sets} x {event.distance_m}m
                 </div>
             )
         }
@@ -126,6 +128,7 @@ export default function NewDayFeed(props) {
         <Loading />
     )
     if (timeline.length === 0) return (
+        //TODO simplify / clean up into individual component
         <div>
             <NoTimelineMessage />
             <div className="flex-shrink-0">

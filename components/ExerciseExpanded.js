@@ -9,6 +9,7 @@ export default function ExerciseExpanded(props) {
     const { user } = useAuth()
     const [deleteModalOpen, setDeleteModalOpen] = useState(false)
     const [editModalOpen, setEditModalOpen] = useState(false)
+    console.log('>>> Exercise Object: ', props.exerciseObject)
 
     const handleDeleteActivity = async (activityId) => {
         event.preventDefault()
@@ -17,6 +18,72 @@ export default function ExerciseExpanded(props) {
         }
         const response = await fetch(`http://localhost:3000/api/delete_activity?uid=${user.uid}&id=${activityId}`)
         await props.refreshFeed()
+    }
+
+    //functions
+    const typeRender = (exerciseObject) => { //TODO simplify / clean up into individual component
+        console.log('>>> Logging exercise object in typeRender function: ', exerciseObject)
+        if (exerciseObject === 'Strength') {
+            return (
+                <li className="flex justify-around px-4 py-4 sm:px-6">
+                    <span className="inline-flex items-center rounded bg-blue-100 px-2 py-0.5 text-sm font-medium text-blue-800">
+                        Sets:
+                    </span>
+                    <span className='inline-flex items-center rounded px-2 py-0.5 text-sm font-medium text-gray-800'>{props.exerciseObject.sets}</span>
+                    <span className="inline-flex items-center rounded bg-blue-100 px-2 py-0.5 text-sm font-medium text-blue-800">
+                        Reps:
+                    </span>
+                    <span className='inline-flex items-center rounded px-2 py-0.5 text-sm font-medium text-gray-800'>{props.exerciseObject.reps}</span>
+                    <span className="inline-flex items-center rounded bg-blue-100 px-2 py-0.5 text-sm font-medium text-blue-800">
+                        kg:
+                    </span>
+                    <span className='inline-flex items-center rounded px-2 py-0.5 text-sm font-medium text-gray-800'>{props.exerciseObject.weight_kg}</span>
+                </li>
+            )
+        } else if (exerciseObject === 'Cardio') {
+            return (
+                <li className="flex justify-around px-4 py-4 sm:px-6">
+                    <span className="inline-flex items-center rounded bg-blue-100 px-2 py-0.5 text-sm font-medium text-blue-800">
+                        Sets:
+                    </span>
+                    <span className='inline-flex items-center rounded px-2 py-0.5 text-sm font-medium text-gray-800'>{props.exerciseObject.sets}</span>
+                    <span className="inline-flex items-center rounded bg-blue-100 px-2 py-0.5 text-sm font-medium text-blue-800">
+                        km:
+                    </span>
+                    <span className='inline-flex items-center rounded px-2 py-0.5 text-sm font-medium text-gray-800'>{props.exerciseObject.reps}</span>
+                    <span className="inline-flex items-center rounded bg-blue-100 px-2 py-0.5 text-sm font-medium text-blue-800">
+                        min(s):
+                    </span>
+                    <span className='inline-flex items-center rounded px-2 py-0.5 text-sm font-medium text-gray-800'>{props.exerciseObject.weight_kg}</span>
+                </li>
+            )
+        } else if (exerciseObject === 'Stretch') {
+            return (
+                <li className="flex justify-around px-4 py-4 sm:px-6">
+                    <span className="inline-flex items-center rounded bg-blue-100 px-2 py-0.5 text-sm font-medium text-blue-800">
+                        Sets:
+                    </span>
+                    <span className='inline-flex items-center rounded px-2 py-0.5 text-sm font-medium text-gray-800'>{props.exerciseObject.sets}</span>
+                    <span className="inline-flex items-center rounded bg-blue-100 px-2 py-0.5 text-sm font-medium text-blue-800">
+                        min(s):
+                    </span>
+                    <span className='inline-flex items-center rounded px-2 py-0.5 text-sm font-medium text-gray-800'>{props.exerciseObject.duration_min}</span>
+                </li>
+            )
+        } else if (exerciseObject === 'Agility') {
+            return (
+                <li className="flex justify-around px-4 py-4 sm:px-6">
+                    <span className="inline-flex items-center rounded bg-blue-100 px-2 py-0.5 text-sm font-medium text-blue-800">
+                        Sets:
+                    </span>
+                    <span className='inline-flex items-center rounded px-2 py-0.5 text-sm font-medium text-gray-800'>{props.exerciseObject.sets}</span>
+                    <span className="inline-flex items-center rounded bg-blue-100 px-2 py-0.5 text-sm font-medium text-blue-800">
+                        m:
+                    </span>
+                    <span className='inline-flex items-center rounded px-2 py-0.5 text-sm font-medium text-gray-800'>{props.exerciseObject.distance_m}</span>
+                </li>
+            )
+        }
     }
 
     return (
@@ -36,21 +103,8 @@ export default function ExerciseExpanded(props) {
             />
 
             <ul role="list" className="divide-y divide-gray-100">
-                <li className="flex justify-around px-4 py-4 sm:px-6">
-                    {/*TODO add css for props*/}
-                    <span className="inline-flex items-center rounded bg-blue-100 px-2 py-0.5 text-sm font-medium text-blue-800">
-                        Sets:
-                    </span>
-                    <span className='inline-flex items-center rounded px-2 py-0.5 text-sm font-medium text-gray-800'>{props.exerciseObject.sets}</span>
-                    <span className="inline-flex items-center rounded bg-blue-100 px-2 py-0.5 text-sm font-medium text-blue-800">
-                        Reps:
-                    </span>
-                    <span className='inline-flex items-center rounded px-2 py-0.5 text-sm font-medium text-gray-800'>{props.exerciseObject.reps}</span>
-                    <span className="inline-flex items-center rounded bg-blue-100 px-2 py-0.5 text-sm font-medium text-blue-800">
-                        kg:
-                    </span>
-                    <span className='inline-flex items-center rounded px-2 py-0.5 text-sm font-medium text-gray-800'>{props.exerciseObject.weight_kg}</span>
-                </li>
+                {/*TODO add css for props*/}
+                {typeRender(props.exerciseObject.type)}
                 <li className="flex justify-start px-4 py-4 sm:px-6">
                     <span className="inline-flex items-center rounded bg-yellow-100 px-2 py-0.5 text-sm font-medium text-yellow-800">
                         Notes:
