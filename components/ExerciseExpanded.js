@@ -50,11 +50,11 @@ export default function ExerciseExpanded(props) {
                     <span className="inline-flex items-center rounded bg-blue-100 px-2 py-0.5 text-sm font-medium text-blue-800">
                         km:
                     </span>
-                    <span className='inline-flex items-center rounded px-2 py-0.5 text-sm font-medium text-gray-800'>{props.exerciseObject.reps}</span>
+                    <span className='inline-flex items-center rounded px-2 py-0.5 text-sm font-medium text-gray-800'>{props.exerciseObject.distance_km}</span>
                     <span className="inline-flex items-center rounded bg-blue-100 px-2 py-0.5 text-sm font-medium text-blue-800">
                         min(s):
                     </span>
-                    <span className='inline-flex items-center rounded px-2 py-0.5 text-sm font-medium text-gray-800'>{props.exerciseObject.weight_kg}</span>
+                    <span className='inline-flex items-center rounded px-2 py-0.5 text-sm font-medium text-gray-800'>{props.exerciseObject.duration_min}</span>
                 </li>
             )
         } else if (exerciseObject === 'Stretch') {

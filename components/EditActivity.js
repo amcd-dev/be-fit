@@ -10,14 +10,22 @@ export default function EditActivity(props) {
     const { user } = useAuth()
     const [open, setOpen] = useState(false)
     const [strengthEdit, setStrengthEdit] = useState({
-        day: 'Mon',
-        name: '',
-        type: 'Strength',
-        sets: 0,
-        reps: 0,
-        kg: 0,
-        notes: ''
+        day: props.selectedActivity.day,
+        name: props.selectedActivity.activity,
+        type: props.selectedActivity.type,
+        sets: props.selectedActivity.sets,
+        reps: props.selectedActivity.reps,
+        kg: props.selectedActivity.weight_kg,
+        weight_lb: props.selectedActivity.weight_lb,
+        distance_km: props.selectedActivity.distance_km,
+        distance_mi: props.selectedActivity.distance_mi,
+        distance_m: props.selectedActivity.distance_m,
+        distance_yd: props.selectedActivity.distance_yd,
+        incline: props.selectedActivity.incline,
+        duration_min: props.selectedActivity.duration_min,
+        notes: props.selectedActivity.notes
     })
+    console.log('>>> Logging strengthEdit: ', strengthEdit)
 
     useEffect(() => {
         if (props.modalOpen) {
@@ -43,6 +51,13 @@ export default function EditActivity(props) {
                 sets: editedActivityObject.sets ? editedActivityObject.sets : props.selectedActivity.sets,
                 reps: editedActivityObject.reps ? editedActivityObject.reps : props.selectedActivity.reps,
                 weight_kg: editedActivityObject.kg ? editedActivityObject.kg : props.selectedActivity.weight_kg,
+                weight_lb: editedActivityObject.weight_lb ? editedActivityObject.weight_lb : props.selectedActivity.weight_lb,
+                distance_km: editedActivityObject.distance_km ? editedActivityObject.distance_km : props.selectedActivity.distance_km,
+                distance_mi: editedActivityObject.distance_mi ? editedActivityObject.distance_mi : props.selectedActivity.distance_mi,
+                distance_m: editedActivityObject.distance_m ? editedActivityObject.distance_m : props.selectedActivity.distance_m,
+                distance_yd: editedActivityObject.distance_yd ? editedActivityObject.distance_yd : props.selectedActivity.distance_yd,
+                incline: editedActivityObject.incline ? editedActivityObject.incline : props.selectedActivity.incline,
+                duration_min: editedActivityObject.duration_min ? editedActivityObject.duration_min : props.selectedActivity.duration_min,
                 notes: editedActivityObject.notes ? editedActivityObject.notes : props.selectedActivity.notes,
             })
         }
@@ -51,6 +66,260 @@ export default function EditActivity(props) {
         console.log('The new settings that have been saved are:', editedActivityObject, ' Performing DB update')
         await props.refreshFeed()
         await props.closeModal()
+    }
+
+    const formTypeRender = (activityType) => {
+        if (activityType === 'Strength') {
+            return (
+                <div>
+                    <BasicInputField
+                        label='Activity Name'
+                        inputType='Text'
+                        name='name'
+                        id='name'
+                        placeholder={strengthEdit.name}
+                        onChange={(value) => {
+                            setStrengthEdit({
+                                ...strengthEdit,
+                                name: value
+                            })
+                        }}
+                    />
+                    <div className='flex'>
+                        <BasicInputField
+                            label='sets'
+                            inputType='number'
+                            name='sets'
+                            id='sets'
+                            placeholder={strengthEdit.sets}
+                            onChange={(value) => {
+                                setStrengthEdit({
+                                    ...strengthEdit,
+                                    sets: value
+                                })
+                            }}
+                        />
+                        <BasicInputField
+                            label='reps'
+                            inputType='number'
+                            name='reps'
+                            id='reps'
+                            placeholder={strengthEdit.reps}
+                            onChange={(value) => {
+                                setStrengthEdit({
+                                    ...strengthEdit,
+                                    reps: value
+                                })
+                            }}
+                        />
+                        <BasicInputField
+                            label='kg'
+                            inputType='number'
+                            name='kg'
+                            id='kg'
+                            placeholder={strengthEdit.kg}
+                            onChange={(value) => {
+                                setStrengthEdit({
+                                    ...strengthEdit,
+                                    kg: value
+                                })
+                            }}
+                        />
+                    </div>
+                    <BasicTextAreaField
+                        currentValue={strengthEdit.notes}
+                        onChange={(value) => {
+                            setStrengthEdit({
+                                ...strengthEdit,
+                                notes: value
+                            })
+                        }}
+                    />
+                </div>
+            )
+
+        } else if (activityType === 'Cardio') {
+            return (
+                <div>
+                    <BasicInputField
+                        label='Activity Name'
+                        inputType='Text'
+                        name='name'
+                        id='name'
+                        placeholder={strengthEdit.name}
+                        onChange={(value) => {
+                            setStrengthEdit({
+                                ...strengthEdit,
+                                name: value
+                            })
+                        }}
+                    />
+                    <div className='flex'>
+                        <BasicInputField
+                            label='sets'
+                            inputType='number'
+                            name='sets'
+                            id='sets'
+                            placeholder={strengthEdit.sets}
+                            onChange={(value) => {
+                                setStrengthEdit({
+                                    ...strengthEdit,
+                                    sets: value
+                                })
+                            }}
+                        />
+                        <BasicInputField
+                            label='distance'
+                            inputType='number'
+                            name='distance'
+                            id='distance'
+                            placeholder={strengthEdit.distance_km}
+                            onChange={(value) => {
+                                setStrengthEdit({
+                                    ...strengthEdit,
+                                    distance_km: value
+                                })
+                            }}
+                        />
+                        <BasicInputField
+                            label='duration'
+                            inputType='number'
+                            name='duration'
+                            id='duration'
+                            placeholder={strengthEdit.duration_min}
+                            onChange={(value) => {
+                                setStrengthEdit({
+                                    ...strengthEdit,
+                                    duration_min: value
+                                })
+                            }}
+                        />
+                    </div>
+                    <BasicTextAreaField
+                        currentValue={strengthEdit.notes}
+                        onChange={(value) => {
+                            setStrengthEdit({
+                                ...strengthEdit,
+                                notes: value
+                            })
+                        }}
+                    />
+                </div>
+            )
+
+        } else if (activityType === 'Stretch') {
+            return (
+                <div>
+                    <BasicInputField
+                        label='Activity Name'
+                        inputType='Text'
+                        name='name'
+                        id='name'
+                        placeholder={strengthEdit.name}
+                        onChange={(value) => {
+                            setStrengthEdit({
+                                ...strengthEdit,
+                                name: value
+                            })
+                        }}
+                    />
+                    <div className='flex'>
+                        <BasicInputField
+                            label='sets'
+                            inputType='number'
+                            name='sets'
+                            id='sets'
+                            placeholder={strengthEdit.sets}
+                            onChange={(value) => {
+                                setStrengthEdit({
+                                    ...strengthEdit,
+                                    sets: value
+                                })
+                            }}
+                        />
+                        <BasicInputField
+                            label='duration'
+                            inputType='number'
+                            name='duration'
+                            id='duration'
+                            placeholder={strengthEdit.duration_min}
+                            onChange={(value) => {
+                                setStrengthEdit({
+                                    ...strengthEdit,
+                                    duration_min: value
+                                })
+                            }}
+                        />
+                    </div>
+                    <BasicTextAreaField
+                        currentValue={strengthEdit.notes}
+                        onChange={(value) => {
+                            setStrengthEdit({
+                                ...strengthEdit,
+                                notes: value
+                            })
+                        }}
+                    />
+                </div>
+            )
+
+        } else if (activityType === 'Agility') {
+            return (
+                <div>
+                    <BasicInputField
+                        label='Activity Name'
+                        inputType='Text'
+                        name='name'
+                        id='name'
+                        placeholder={strengthEdit.name}
+                        onChange={(value) => {
+                            setStrengthEdit({
+                                ...strengthEdit,
+                                name: value
+                            })
+                        }}
+                    />
+                    <div className='flex'>
+                        <BasicInputField
+                            label='sets'
+                            inputType='number'
+                            name='sets'
+                            id='sets'
+                            placeholder={strengthEdit.sets}
+                            onChange={(value) => {
+                                setStrengthEdit({
+                                    ...strengthEdit,
+                                    sets: value
+                                })
+                            }}
+                        />
+                        <BasicInputField
+                            label='distance'
+                            inputType='number'
+                            name='distance'
+                            id='distance'
+                            placeholder={strengthEdit.distance_m}
+                            onChange={(value) => {
+                                setStrengthEdit({
+                                    ...strengthEdit,
+                                    distance_m: value
+                                })
+                            }}
+                        />
+                    </div>
+                    <BasicTextAreaField
+                        currentValue={strengthEdit.notes}
+                        onChange={(value) => {
+                            setStrengthEdit({
+                                ...strengthEdit,
+                                notes: value
+                            })
+                        }}
+                    />
+                </div>
+            )
+
+        }
     }
 
     return (
@@ -89,81 +358,80 @@ export default function EditActivity(props) {
                                             Edit Activity
                                         </Dialog.Title>
                                         {/*Form content below*/}
-                                        {/* Ternary statement to check what type of exercise for what type of form */}
                                         {/*//TODO find way to stop dropdown being default selected, so if nothing is changed, no api call is made*/}
                                         <ActivityTypeDropdown
                                             activityType={props.selectedActivity.type}
                                             handleAddType={(activityType) => {
                                                 setStrengthEdit({
-                                                    ...setStrengthEdit,
+                                                    ...strengthEdit,
                                                     type: activityType
                                                 })
                                             }}
-
                                         />
-                                        <BasicInputField
-                                            label='Activity Name'
-                                            inputType='Text'
-                                            name='name'
-                                            id='name'
-                                            placeholder={props.selectedActivity.activity}
-                                            onChange={(value) => {
-                                                setStrengthEdit({
-                                                    ...strengthEdit,
-                                                    name: value
-                                                })}
-                                            }
-                                        />
-                                        <div className='flex'>
-                                            <BasicInputField
-                                                label='sets'
-                                                inputType='number'
-                                                name='sets'
-                                                id='sets'
-                                                placeholder={props.selectedActivity.sets}
-                                                onChange={(value) => {
-                                                    setStrengthEdit({
-                                                        ...strengthEdit,
-                                                        sets: value
-                                                    })}
-                                            }
-                                            />
-                                            <BasicInputField
-                                                label='reps'
-                                                inputType='number'
-                                                name='reps'
-                                                id='reps'
-                                                placeholder={props.selectedActivity.reps}
-                                                onChange={(value) => {
-                                                    setStrengthEdit({
-                                                        ...strengthEdit,
-                                                        reps: value
-                                                    })}
-                                                }
-                                            />
-                                            <BasicInputField
-                                                label='kg'
-                                                inputType='number'
-                                                name='kg'
-                                                id='kg'
-                                                placeholder={props.selectedActivity.weight_kg}
-                                                onChange={(value) => {
-                                                    setStrengthEdit({
-                                                        ...strengthEdit,
-                                                        kg: value
-                                                    })}
-                                                }
-                                            />
-                                        </div>
-                                        <BasicTextAreaField
-                                            currentValue={props.selectedActivity.notes}
-                                            onChange={(value) => {
-                                                setStrengthEdit({
-                                                    ...strengthEdit,
-                                                    notes: value
-                                                })}
-                                            }
-                                        />
+                                        {formTypeRender(props.selectedActivity.type)}
+                                        {/*<BasicInputField*/}
+                                        {/*    label='Activity Name'*/}
+                                        {/*    inputType='Text'*/}
+                                        {/*    name='name'*/}
+                                        {/*    id='name'*/}
+                                        {/*    placeholder={props.selectedActivity.activity}*/}
+                                        {/*    onChange={(value) => {*/}
+                                        {/*        setStrengthEdit({*/}
+                                        {/*            ...strengthEdit,*/}
+                                        {/*            name: value*/}
+                                        {/*        })}*/}
+                                        {/*    }*/}
+                                        {/*/>*/}
+                                        {/*<div className='flex'>*/}
+                                        {/*    <BasicInputField*/}
+                                        {/*        label='sets'*/}
+                                        {/*        inputType='number'*/}
+                                        {/*        name='sets'*/}
+                                        {/*        id='sets'*/}
+                                        {/*        placeholder={props.selectedActivity.sets}*/}
+                                        {/*        onChange={(value) => {*/}
+                                        {/*            setStrengthEdit({*/}
+                                        {/*                ...strengthEdit,*/}
+                                        {/*                sets: value*/}
+                                        {/*            })}*/}
+                                        {/*    }*/}
+                                        {/*    />*/}
+                                        {/*    <BasicInputField*/}
+                                        {/*        label='reps'*/}
+                                        {/*        inputType='number'*/}
+                                        {/*        name='reps'*/}
+                                        {/*        id='reps'*/}
+                                        {/*        placeholder={props.selectedActivity.reps}*/}
+                                        {/*        onChange={(value) => {*/}
+                                        {/*            setStrengthEdit({*/}
+                                        {/*                ...strengthEdit,*/}
+                                        {/*                reps: value*/}
+                                        {/*            })}*/}
+                                        {/*        }*/}
+                                        {/*    />*/}
+                                        {/*    <BasicInputField*/}
+                                        {/*        label='kg'*/}
+                                        {/*        inputType='number'*/}
+                                        {/*        name='kg'*/}
+                                        {/*        id='kg'*/}
+                                        {/*        placeholder={props.selectedActivity.weight_kg}*/}
+                                        {/*        onChange={(value) => {*/}
+                                        {/*            setStrengthEdit({*/}
+                                        {/*                ...strengthEdit,*/}
+                                        {/*                kg: value*/}
+                                        {/*            })}*/}
+                                        {/*        }*/}
+                                        {/*    />*/}
+                                        {/*</div>*/}
+                                        {/*<BasicTextAreaField*/}
+                                        {/*    currentValue={props.selectedActivity.notes}*/}
+                                        {/*    onChange={(value) => {*/}
+                                        {/*        setStrengthEdit({*/}
+                                        {/*            ...strengthEdit,*/}
+                                        {/*            notes: value*/}
+                                        {/*        })}*/}
+                                        {/*    }*/}
+                                        {/*/>*/}
                                         {/*Form content above*/}
 
                                     </div>
