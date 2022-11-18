@@ -8,6 +8,7 @@ async function getStrength (uid, day) {
 }
 
 export default async function handler(req, res) {
+    console.log('Received time line fetch')
     // console.log('>>> logging req.query', req.query)
     const uid = req.query.uid
     const day = req.query.day

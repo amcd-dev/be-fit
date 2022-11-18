@@ -34,6 +34,7 @@ export default function NewDayFeed(props) {
 
     //Functions
     async function fetchTimeLine() {
+        console.log('Initialising time line fetch')
         const reqOptions = {
             method: 'GET',
             headers: {
