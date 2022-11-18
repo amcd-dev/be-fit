@@ -155,6 +155,7 @@ export default function NewDayFeed(props) {
             <AddActivity
                 modalOpen ={addActivityOpen}
                 closeModal={() => setAddActivityOpen(false)}
+                currentDay={currentDay}
             />
         </div>
 
