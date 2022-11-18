@@ -37,6 +37,7 @@ export default function NewDayFeed(props) {
         console.log('Initialising time line fetch')
         const reqOptions = {
             method: 'GET',
+            mode: 'cors',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
