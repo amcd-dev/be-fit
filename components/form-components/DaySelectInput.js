@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import {useEffect, useState} from 'react'
 import { RadioGroup } from '@headlessui/react'
 
-const memoryOptions = [
+const dayOptions = [
     { name: 'Mon'},
     { name: 'Tue'},
     { name: 'Wed'},
@@ -16,14 +16,20 @@ function classNames(...classes) {
 }
 
 export default function DaySelectInput(props) {
-    const [mem, setMem] = useState(memoryOptions[0])
+    const [defaultDay, setDefaultDay] = useState({name: props.currentDay})
+    console.log('>>> [DaySelectInput.js] current day prop', props.currentDay)
+    console.log('>>> [DaySelectInput.js] defaultDay use state', defaultDay)
+
+    useEffect(() => {
+        props.onChange(defaultDay.name)
+    },[])
 
     return (
         <div>
             <RadioGroup
-                value={mem}
+                value={defaultDay}
                 onChange={(value) => {
-                    setMem(value)
+                    setDefaultDay(value)
                     props.onChange(value.name)
                 }}
                 className="mt-4"
@@ -31,7 +37,7 @@ export default function DaySelectInput(props) {
             >
                 <RadioGroup.Label className="sr-only">Choose a Day</RadioGroup.Label>
                 <div className="grid grid-cols-4 gap-2 sm:grid-cols-7">
-                    {memoryOptions.map((option) => (
+                    {dayOptions.map((option) => (
                         <RadioGroup.Option
                             key={option.name}
                             value={option}

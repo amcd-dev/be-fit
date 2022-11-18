@@ -10,6 +10,8 @@ async function addActivity (uid, activityName, type, day, sets, reps, weight_kg,
 }
 
 export default async function handler(req, res) {
+    //TODO convert to objects
+
     const uid = req.query.uid
     const activityName = req.body.activityName
     const type = req.body.type
@@ -26,7 +28,14 @@ export default async function handler(req, res) {
     const duration_min = req.body.duration_min
     const notes = req.body.notes
 
-    const result = await addActivity(uid, activityName, type, day, sets, reps, weight_kg, weight_lb, distance_km, distance_mi, distance_m, distance_yd, incline, duration_min, notes)
-    res.status(200).json(result)
+    const resultArray = []
+
+    for (let i = 0; i < day.length; i++) {
+        const result = await addActivity(uid, activityName, type, day[i], sets, reps, weight_kg, weight_lb, distance_km, distance_mi, distance_m, distance_yd, incline, duration_min, notes)
+        resultArray.push(result)
+    }
+    res.status(200).json(resultArray)
+    // const result = await addActivity(uid, activityName, type, day, sets, reps, weight_kg, weight_lb, distance_km, distance_mi, distance_m, distance_yd, incline, duration_min, notes)
+    // res.status(200).json(result)
 }
 

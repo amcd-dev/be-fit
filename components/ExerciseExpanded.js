@@ -9,7 +9,7 @@ export default function ExerciseExpanded(props) {
     const { user } = useAuth()
     const [deleteModalOpen, setDeleteModalOpen] = useState(false)
     const [editModalOpen, setEditModalOpen] = useState(false)
-    console.log('>>> Exercise Object: ', props.exerciseObject)
+    // console.log('>>> Exercise Object: ', props.exerciseObject)
 
     const handleDeleteActivity = async (activityId) => {
         event.preventDefault()

@@ -25,7 +25,6 @@ export default function EditActivity(props) {
         duration_min: props.selectedActivity.duration_min,
         notes: props.selectedActivity.notes
     })
-    console.log('>>> Logging strengthEdit: ', strengthEdit)
 
     useEffect(() => {
         if (props.modalOpen) {
@@ -357,8 +356,9 @@ export default function EditActivity(props) {
                                         <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
                                             Edit Activity
                                         </Dialog.Title>
-                                        {/*Form content below*/}
-                                        {/*//TODO find way to stop dropdown being default selected, so if nothing is changed, no api call is made*/}
+
+                                        {/****** Form content below ******/}
+
                                         <ActivityTypeDropdown
                                             activityType={props.selectedActivity.type}
                                             handleAddType={(activityType) => {
@@ -368,72 +368,7 @@ export default function EditActivity(props) {
                                                 })
                                             }}
                                         />
-                                        {formTypeRender(props.selectedActivity.type)}
-                                        {/*<BasicInputField*/}
-                                        {/*    label='Activity Name'*/}
-                                        {/*    inputType='Text'*/}
-                                        {/*    name='name'*/}
-                                        {/*    id='name'*/}
-                                        {/*    placeholder={props.selectedActivity.activity}*/}
-                                        {/*    onChange={(value) => {*/}
-                                        {/*        setStrengthEdit({*/}
-                                        {/*            ...strengthEdit,*/}
-                                        {/*            name: value*/}
-                                        {/*        })}*/}
-                                        {/*    }*/}
-                                        {/*/>*/}
-                                        {/*<div className='flex'>*/}
-                                        {/*    <BasicInputField*/}
-                                        {/*        label='sets'*/}
-                                        {/*        inputType='number'*/}
-                                        {/*        name='sets'*/}
-                                        {/*        id='sets'*/}
-                                        {/*        placeholder={props.selectedActivity.sets}*/}
-                                        {/*        onChange={(value) => {*/}
-                                        {/*            setStrengthEdit({*/}
-                                        {/*                ...strengthEdit,*/}
-                                        {/*                sets: value*/}
-                                        {/*            })}*/}
-                                        {/*    }*/}
-                                        {/*    />*/}
-                                        {/*    <BasicInputField*/}
-                                        {/*        label='reps'*/}
-                                        {/*        inputType='number'*/}
-                                        {/*        name='reps'*/}
-                                        {/*        id='reps'*/}
-                                        {/*        placeholder={props.selectedActivity.reps}*/}
-                                        {/*        onChange={(value) => {*/}
-                                        {/*            setStrengthEdit({*/}
-                                        {/*                ...strengthEdit,*/}
-                                        {/*                reps: value*/}
-                                        {/*            })}*/}
-                                        {/*        }*/}
-                                        {/*    />*/}
-                                        {/*    <BasicInputField*/}
-                                        {/*        label='kg'*/}
-                                        {/*        inputType='number'*/}
-                                        {/*        name='kg'*/}
-                                        {/*        id='kg'*/}
-                                        {/*        placeholder={props.selectedActivity.weight_kg}*/}
-                                        {/*        onChange={(value) => {*/}
-                                        {/*            setStrengthEdit({*/}
-                                        {/*                ...strengthEdit,*/}
-                                        {/*                kg: value*/}
-                                        {/*            })}*/}
-                                        {/*        }*/}
-                                        {/*    />*/}
-                                        {/*</div>*/}
-                                        {/*<BasicTextAreaField*/}
-                                        {/*    currentValue={props.selectedActivity.notes}*/}
-                                        {/*    onChange={(value) => {*/}
-                                        {/*        setStrengthEdit({*/}
-                                        {/*            ...strengthEdit,*/}
-                                        {/*            notes: value*/}
-                                        {/*        })}*/}
-                                        {/*    }*/}
-                                        {/*/>*/}
-                                        {/*Form content above*/}
-
+                                        {formTypeRender(strengthEdit.type)}
                                     </div>
                                 </div>
                                 <div className="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">

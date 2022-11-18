@@ -6,12 +6,13 @@ import BasicInputField from "./form-components/BasicInputField";
 import BasicTextAreaField from "./form-components/BasicTextAreaField";
 import DaySelectInput from "./form-components/DaySelectInput";
 import {useAuth} from "../context/AuthContext";
+import MultipleDaySelectInput from "./form-components/MultipleDaySelectInput";
 
 export default function AddActivity(props) {
     const { user } = useAuth()
     const [open, setOpen] = useState(false)
     const [activityAdd, setActivityAdd] = useState({
-        day: 'Mon',
+        day: '',
         name: 'Test activity',
         type: 'Strength',
         sets: 0,
@@ -26,6 +27,8 @@ export default function AddActivity(props) {
         duration_min: 0,
         notes: ''
     })
+    // console.log('>>> [AddActivity.js] props.currentDay: ', props.currentDay)
+    console.log ('>>> activityAdd in [AddActivity.js]: ', activityAdd)
 
     useEffect(() => {
         if (props.modalOpen) {
@@ -64,6 +67,14 @@ export default function AddActivity(props) {
         const response = await fetch(`http://localhost:3000/api/add_activity?uid=${user.uid}`, reqOptions)
         await props.closeModal()
 
+    }
+
+    const handleAddDays = (dayArray) => {
+        console.log('>>> handleAddDays initiated with: ', dayArray)
+        setActivityAdd({
+            ...activityAdd,
+            day: dayArray
+        })
     }
 
     const formTypeRender = (activityType) => {
@@ -352,13 +363,18 @@ export default function AddActivity(props) {
                                             Add New Activity
                                         </Dialog.Title>
                                         {/*Form content below*/}
-                                        <DaySelectInput
-                                            onChange={(value) => {
-                                                setActivityAdd({
-                                                    ...activityAdd,
-                                                    day: value
-                                                })}
-                                            }
+                                        {/*<DaySelectInput*/}
+                                        {/*    currentDay={props.currentDay}*/}
+                                        {/*    onChange={(value) => {*/}
+                                        {/*        setActivityAdd({*/}
+                                        {/*            ...activityAdd,*/}
+                                        {/*            day: value*/}
+                                        {/*        })}*/}
+                                        {/*    }*/}
+                                        {/*/>*/}
+                                        <MultipleDaySelectInput
+                                            currentDay={props.currentDay}
+                                            addDays={(selectedDays) => handleAddDays(selectedDays)}
                                         />
                                         <ActivityTypeDropdown
                                             activityType={activityAdd.type}

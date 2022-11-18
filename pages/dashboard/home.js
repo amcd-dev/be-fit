@@ -14,7 +14,8 @@ export default function Home() {
     const { user } = useAuth()
 
     const [currentDay, setCurrentDay] = useState('Mon') //TODO set day dynamically based on the actual day
-    console.log('>>> Logging current selected day: ',currentDay )
+    // console.log('>>> Logging current selected day: ', currentDay )
+    // console.log(new Date().toLocaleString('default', {weekday: 'short'}))
 
     //Functions
 

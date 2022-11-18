@@ -20,16 +20,15 @@ export default function NewDayFeed(props) {
     const { user } = useAuth()
 
     const currentDay = props.selectedDay
+    // console.log('>>> Logging current day variable from NewDayFeed', currentDay)
 
     const [isLoading, setLoading] = useState(false)
     const [timeline, setTimeLine] = useState([])
     const [addActivityOpen, setAddActivityOpen] = useState(false)
 
     // console.log('>>> Logging timeline on page render', timeline)
-    // console.log('][ ][ Day Feed Page render ][ ][')
 
     useEffect(() => { //Fetches the timeline on page load
-        console.log('>>> Triggering useEffect fetch for timeline')
         fetchTimeLine()
     },[currentDay, addActivityOpen]) //re-fetches everytime user selects a new day. Could rejig this to only re-fetch on edits, deletes and adds?
 
@@ -226,6 +225,7 @@ export default function NewDayFeed(props) {
                 </button>
             </div>
             <AddActivity
+                currentDay={currentDay}
                 modalOpen ={addActivityOpen}
                 closeModal={() => setAddActivityOpen(false)}
             />

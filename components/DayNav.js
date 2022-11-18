@@ -1,5 +1,5 @@
 import { CheckIcon } from '@heroicons/react/20/solid'
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 const steps = [
     { name: 'Mon', icon: 'M', href: '#', status: 'current' },
@@ -48,6 +48,11 @@ export default function DayNav(props) {
             })
         }
     }
+
+    // useEffect(() => {
+    //     handleUpcomingOnSelect('Wed', 'current')
+    // }, [])
+
 
     return (
         <nav aria-label="Progress">
