@@ -1,5 +1,4 @@
 import sql from "../../lib/db";
-import NextCors from "nextjs-cors";
 
 async function getStrength (uid, day) {
     const activity = await sql `
