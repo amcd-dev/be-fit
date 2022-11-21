@@ -11,12 +11,13 @@ async function getStrength (uid, day) {
 export default async function handler(req, res) {
     console.log('Received time line fetch')
     // console.log('>>> logging req.query', req.query)
-    await NextCors(req, res, {
-        // Options
-        methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
-        origin: '*',
-        optionsSuccessStatus: 200,
-    });
+
+    // await NextCors(req, res, {
+    //     // Options
+    //     methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+    //     origin: '*',
+    //     optionsSuccessStatus: 200,
+    // });
 
 
     const uid = req.query.uid

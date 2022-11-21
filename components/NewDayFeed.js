@@ -44,7 +44,7 @@ export default function NewDayFeed(props) {
         //     }
         // }
         setLoading(true)
-        const response = await fetch(`http://localhost:3000/api/test?uid=${user.uid}&day=${currentDay}`)
+        const response = await fetch(`https://be-fit-amcd-dev.vercel.app/api/test?uid=${user.uid}&day=${currentDay}`)
         setTimeLine(await response.json())
         await setLoading(false)
     }
