@@ -35,16 +35,16 @@ export default function NewDayFeed(props) {
     //Functions
     async function fetchTimeLine() {
         console.log('Initialising time line fetch')
-        const reqOptions = {
-            method: 'GET',
-            mode: 'cors',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        }
+        // const reqOptions = {
+        //     method: 'GET',
+        //     mode: 'cors',
+        //     headers: {
+        //         'Accept': 'application/json',
+        //         'Content-Type': 'application/json'
+        //     }
+        // }
         setLoading(true)
-        const response = await fetch(`http://localhost:3000/api/test?uid=${user.uid}&day=${currentDay}`, reqOptions)
+        const response = await fetch(`http://localhost:3000/api/test?uid=${user.uid}&day=${currentDay}`)
         setTimeLine(await response.json())
         await setLoading(false)
     }
