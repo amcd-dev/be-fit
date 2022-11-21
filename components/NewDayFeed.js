@@ -20,7 +20,7 @@ export const apiPath = () => {
     if (location.hostname === 'localhost') {
         return 'http://localhost:3000'
     } else {
-        return 'https://be-fit-amcd-dev.vercel.app'
+        return 'https://be-fit-nu.vercel.app'
     }
 }
 
