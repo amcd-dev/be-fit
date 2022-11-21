@@ -5,6 +5,7 @@ import ActivityTypeDropdown from "./form-components/ActivityTypeDropdown";
 import BasicInputField from "./form-components/BasicInputField";
 import BasicTextAreaField from "./form-components/BasicTextAreaField";
 import {useAuth} from "../context/AuthContext";
+import {apiPath} from "./NewDayFeed";
 
 export default function EditActivity(props) {
     const { user } = useAuth()
@@ -61,7 +62,7 @@ export default function EditActivity(props) {
             })
         }
 
-        const response = await fetch(`http://localhost:3000/api/edit_activity?uid=${user.uid}&id=${props.selectedActivity.id}`, reqOptions)
+        const response = await fetch(`${apiPath()}/api/edit_activity?uid=${user.uid}&id=${props.selectedActivity.id}`, reqOptions)
         console.log('The new settings that have been saved are:', editedActivityObject, ' Performing DB update')
         await props.refreshFeed()
         await props.closeModal()

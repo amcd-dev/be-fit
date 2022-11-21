@@ -3,6 +3,7 @@ import { PencilIcon, TrashIcon } from '@heroicons/react/20/solid'
 import DeleteActivity from "./DeleteActivity";
 import EditActivity from "./EditActivity";
 import {useAuth} from "../context/AuthContext";
+import {apiPath} from "./NewDayFeed";
 
 
 export default function ExerciseExpanded(props) {
@@ -16,7 +17,7 @@ export default function ExerciseExpanded(props) {
         const reqOptions = {
             method: 'DELETE'
         }
-        const response = await fetch(`http://localhost:3000/api/delete_activity?uid=${user.uid}&id=${activityId}`)
+        const response = await fetch(`${apiPath()}/api/delete_activity?uid=${user.uid}&id=${activityId}`)
         await props.refreshFeed()
     }
 

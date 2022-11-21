@@ -7,6 +7,7 @@ import BasicTextAreaField from "./form-components/BasicTextAreaField";
 import DaySelectInput from "./form-components/DaySelectInput";
 import {useAuth} from "../context/AuthContext";
 import MultipleDaySelectInput from "./form-components/MultipleDaySelectInput";
+import {apiPath} from "./NewDayFeed";
 
 export default function AddActivity(props) {
     const { user } = useAuth()
@@ -64,7 +65,7 @@ export default function AddActivity(props) {
                 notes: activityObject.notes,
             })
         }
-        const response = await fetch(`http://localhost:3000/api/add_activity?uid=${user.uid}`, reqOptions)
+        const response = await fetch(`${apiPath()}/api/add_activity?uid=${user.uid}`, reqOptions)
         await props.closeModal()
 
     }
