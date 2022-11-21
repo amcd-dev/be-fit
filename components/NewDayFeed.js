@@ -16,6 +16,14 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
+export const apiPath = () => {
+    if (location.hostname === 'localhost') {
+        return 'http://localhost:3000'
+    } else {
+        return 'https://be-fit-amcd-dev.vercel.app/'
+    }
+}
+
 export default function NewDayFeed(props) {
     const { user } = useAuth()
 
@@ -44,7 +52,7 @@ export default function NewDayFeed(props) {
         //     }
         // }
         setLoading(true)
-        const response = await fetch(`https://be-fit-amcd-dev.vercel.app/api/test?uid=${user.uid}&day=${currentDay}`)
+        const response = await fetch(`${apiPath()}/api/test?uid=${user.uid}&day=${currentDay}`)
         setTimeLine(await response.json())
         await setLoading(false)
     }
