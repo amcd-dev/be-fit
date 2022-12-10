@@ -110,7 +110,7 @@ export default function ExerciseExpanded(props) {
                     <span className="inline-flex items-center rounded bg-yellow-100 px-2 py-0.5 text-sm font-medium text-yellow-800">
                         Notes:
                     </span>
-                    <span> {props.exerciseObject.notes}</span>
+                    <span className="mx-3 text-sm font-small">{props.exerciseObject.notes}</span>
                 </li>
                 <li className="px-4  sm:px-6">
                     <div className="relative">

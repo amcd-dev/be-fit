@@ -4,8 +4,7 @@ import {useEffect, useState} from "react";
 export default function MultipleDaySelectInput(props) {
 
     const [selectedDays, setSelectedDays] = useState([])
-    console.log('page render selectedDays array', selectedDays)
-    // console.log('[MultipleDaySelect.js] props.currentDay: ', props.currentDay)
+
 
     useEffect(() => {
         setSelectedDays([props.currentDay])
@@ -40,6 +39,7 @@ export default function MultipleDaySelectInput(props) {
     }
     const handleDefaultChecked = (currentDay, value) => {
         //Pre-selects the day the user has currently selected in the feed
+        //If it is true, it will return set it as checked, if it is false it won't
         return currentDay === value;
     }
 

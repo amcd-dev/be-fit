@@ -71,7 +71,6 @@ export const AuthContextProvider = ( {children } ) => {
                 console.log({ errorCode, errorMessage, email, credential });
             })
         ;};
-    //google testing ###
 
     return (
         //All components will have access to the below methods / states

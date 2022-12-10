@@ -14,7 +14,7 @@ export default function AddActivity(props) {
     const [open, setOpen] = useState(false)
     const [activityAdd, setActivityAdd] = useState({
         day: '',
-        name: 'Test activity',
+        name: 'Unnamed activity',
         type: 'Strength',
         sets: 0,
         reps: 0,
@@ -28,8 +28,6 @@ export default function AddActivity(props) {
         duration_min: 0,
         notes: ''
     })
-    // console.log('>>> [AddActivity.js] props.currentDay: ', props.currentDay)
-    console.log ('>>> activityAdd in [AddActivity.js]: ', activityAdd)
 
     useEffect(() => {
         if (props.modalOpen) {
@@ -71,7 +69,7 @@ export default function AddActivity(props) {
     }
 
     const handleAddDays = (dayArray) => {
-        console.log('>>> handleAddDays initiated with: ', dayArray)
+        // console.log('>>> handleAddDays initiated with: ', dayArray)
         setActivityAdd({
             ...activityAdd,
             day: dayArray

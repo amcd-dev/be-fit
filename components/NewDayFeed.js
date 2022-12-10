@@ -42,7 +42,7 @@ export default function NewDayFeed(props) {
 
     //Functions
     async function fetchTimeLine() {
-        console.log('Initialising time line fetch')
+        // console.log('Initialising time line fetch')
         setLoading(true)
         const response = await fetch(`${apiPath()}/api/test?uid=${user.uid}&day=${currentDay}`)
         setTimeLine(await response.json())

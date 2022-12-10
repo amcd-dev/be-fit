@@ -1,10 +1,11 @@
 import {Fragment, useState} from 'react'
 import {Disclosure, Menu, Transition} from '@headlessui/react'
 import {Bars3Icon, BellIcon, XMarkIcon} from '@heroicons/react/24/outline'
-import {PlusIcon} from '@heroicons/react/20/solid'
 import {useAuth} from "../context/AuthContext";
 import {useRouter} from "next/router";
-import AddActivity from "./AddActivity";
+
+import IconUserHeartFill from "./icons/IconUserHeart";
+import IconHeartLogo from "./icons/IconHeartLogo";
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -38,16 +39,24 @@ export default function TopNav(props) {
                                         </Disclosure.Button>
                                     </div>
                                     <div className="flex flex-shrink-0 items-center">
-                                        <img
-                                            className="block h-8 w-auto lg:hidden"
-                                            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                                            alt="Your Company"
-                                        />
-                                        <img
-                                            className="hidden h-8 w-auto lg:block"
-                                            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                                            alt="Your Company"
-                                        />
+                                        {/*//Original Tailwind logo*/}
+                                        {/*<img*/}
+                                        {/*    className="block h-8 w-auto lg:hidden"*/}
+                                        {/*    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"*/}
+                                        {/*    alt="Your Company"*/}
+                                        {/*/>*/}
+                                        {/*<img*/}
+                                        {/*    className="hidden h-8 w-auto lg:block"*/}
+                                        {/*    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"*/}
+                                        {/*    alt="Your Company"*/}
+                                        {/*/>*/}
+                                        <IconHeartLogo />
+                                        <h1 className=" mx-2 text-center text-3xl font-bold tracking-tight text-gray-900">
+                                            Be-Fit
+                                        </h1>
+                                        <span className="inline-flex items-center rounded bg-yellow-100 ml-2 px-2 py-0.5 text-xs font-medium text-yellow-800">
+                                            Beta
+                                        </span>
                                     </div>
                                     <div className="hidden md:ml-6 md:flex md:space-x-8">
                                         {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
@@ -82,11 +91,13 @@ export default function TopNav(props) {
                                             <div>
                                                 <Menu.Button className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                                                     <span className="sr-only">Open user menu</span>
-                                                    <img
-                                                        className="h-8 w-8 rounded-full"
-                                                        src="https://images.unsplash.com/photo-1563050912-b15276e395c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjZ8fGZpc2h8ZW58MHwyfDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                                                        alt=""
-                                                    />
+                                                    <IconUserHeartFill/>
+                                                    {/*Profile picture goes here*/}
+                                                    {/*<img*/}
+                                                    {/*    className="h-8 w-8 rounded-full"*/}
+                                                    {/*    src="https://images.unsplash.com/photo-1563050912-b15276e395c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjZ8fGZpc2h8ZW58MHwyfDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"*/}
+                                                    {/*    alt=""*/}
+                                                    {/*/>*/}
                                                 </Menu.Button>
                                             </div>
                                             <Transition
@@ -99,32 +110,32 @@ export default function TopNav(props) {
                                                 leaveTo="transform opacity-0 scale-95"
                                             >
                                                 <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                                    <Menu.Item>
-                                                        {({active}) => (
-                                                            <a
-                                                                href="#"
-                                                                className={classNames(
-                                                                    active ? 'bg-gray-100' : '',
-                                                                    'block px-4 py-2 text-sm text-gray-700'
-                                                                )}
-                                                            >
-                                                                Your Profile
-                                                            </a>
-                                                        )}
-                                                    </Menu.Item>
-                                                    <Menu.Item>
-                                                        {({active}) => (
-                                                            <a
-                                                                href="#"
-                                                                className={classNames(
-                                                                    active ? 'bg-gray-100' : '',
-                                                                    'block px-4 py-2 text-sm text-gray-700'
-                                                                )}
-                                                            >
-                                                                Settings
-                                                            </a>
-                                                        )}
-                                                    </Menu.Item>
+                                                    {/*<Menu.Item>*/}
+                                                    {/*    {({active}) => (*/}
+                                                    {/*        <a*/}
+                                                    {/*            href="#"*/}
+                                                    {/*            className={classNames(*/}
+                                                    {/*                active ? 'bg-gray-100' : '',*/}
+                                                    {/*                'block px-4 py-2 text-sm text-gray-700'*/}
+                                                    {/*            )}*/}
+                                                    {/*        >*/}
+                                                    {/*            Your Profile*/}
+                                                    {/*        </a>*/}
+                                                    {/*    )}*/}
+                                                    {/*</Menu.Item>*/}
+                                                    {/*<Menu.Item>*/}
+                                                    {/*    {({active}) => (*/}
+                                                    {/*        <a*/}
+                                                    {/*            href="#"*/}
+                                                    {/*            className={classNames(*/}
+                                                    {/*                active ? 'bg-gray-100' : '',*/}
+                                                    {/*                'block px-4 py-2 text-sm text-gray-700'*/}
+                                                    {/*            )}*/}
+                                                    {/*        >*/}
+                                                    {/*            Settings*/}
+                                                    {/*        </a>*/}
+                                                    {/*    )}*/}
+                                                    {/*</Menu.Item>*/}
                                                     <Menu.Item>
                                                         {({active}) => (
                                                             <a
@@ -170,11 +181,14 @@ export default function TopNav(props) {
                             <div className="border-t border-gray-200 pt-4 pb-3">
                                 <div className="flex items-center px-4 sm:px-6">
                                     <div className="flex-shrink-0">
-                                        <img
-                                            className="h-10 w-10 rounded-full"
-                                            src="https://images.unsplash.com/photo-1563050912-b15276e395c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjZ8fGZpc2h8ZW58MHwyfDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                                            alt=""
-                                        />
+                                        {/*Profile picture goes here*/}
+                                        {/*<img*/}
+                                        {/*    className="h-10 w-10 rounded-full"*/}
+                                        {/*    src="https://images.unsplash.com/photo-1563050912-b15276e395c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjZ8fGZpc2h8ZW58MHwyfDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"*/}
+                                        {/*    alt=""*/}
+                                        {/*/>*/}
+                                        <IconUserHeartFill/>
+
                                     </div>
                                     <div className="ml-3">
                                         <div className="text-base font-medium text-gray-800">Be-Fit User</div>
@@ -191,20 +205,20 @@ export default function TopNav(props) {
                                 </div>
                                 {user ?
                                     <div className="mt-3 space-y-1">
-                                        <Disclosure.Button
-                                            as="a"
-                                            href="#"
-                                            className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800 sm:px-6"
-                                        >
-                                            Your Profile
-                                        </Disclosure.Button>
-                                        <Disclosure.Button
-                                            as="a"
-                                            href="#"
-                                            className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800 sm:px-6"
-                                        >
-                                            Settings
-                                        </Disclosure.Button>
+                                        {/*<Disclosure.Button*/}
+                                        {/*    as="a"*/}
+                                        {/*    href="#"*/}
+                                        {/*    className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800 sm:px-6"*/}
+                                        {/*>*/}
+                                        {/*    Your Profile*/}
+                                        {/*</Disclosure.Button>*/}
+                                        {/*<Disclosure.Button*/}
+                                        {/*    as="a"*/}
+                                        {/*    href="#"*/}
+                                        {/*    className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800 sm:px-6"*/}
+                                        {/*>*/}
+                                        {/*    Settings*/}
+                                        {/*</Disclosure.Button>*/}
                                         <Disclosure.Button
                                             as="a"
                                             href='#'
